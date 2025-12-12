@@ -20,24 +20,37 @@ export default function Resume() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Button
-              size="lg"
-              className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
-              onClick={() => window.open("/resume-akash-k.pdf", "_blank")}
-            >
-              <Download className="w-5 h-5" />
-              Download Resume (PDF)
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="gap-2 bg-transparent"
-              onClick={() => window.open("https://github.com/akashkuppattil-dev", "_blank")}
-            >
-              View GitHub Profile
-            </Button>
-          </div>
+         <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
+  <a
+    href="/Akash_K_Software_Developer_Resume.pdf"
+    download="Akash_K_Software_Developer_Resume.pdf"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button
+      size="lg"
+      className="bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
+    >
+      <Download className="w-5 h-5" />
+      Download Resume (PDF)
+    </Button>
+  </a>
+
+  <a
+    href="https://github.com/akashkuppattil-dev"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button
+      size="lg"
+      variant="outline"
+      className="gap-2 bg-transparent"
+    >
+      View GitHub Profile
+    </Button>
+  </a>
+</div>
+
 
           {/* Resume preview card */}
           <Card className="mt-12 p-8 border-border/50 glass max-w-2xl mx-auto">
