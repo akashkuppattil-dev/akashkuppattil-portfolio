@@ -66,10 +66,22 @@ export default function About() {
               </div>
             </Card>
 
-            <Button size="lg" className="w-full bg-accent hover:bg-accent/90 text-accent-foreground gap-2">
-              <Download className="w-4 h-4" />
-              Resume (PDF)
-            </Button>
+           <a
+  href="/Akash_K_Software_Developer_Resume.pdf"
+  download="Akash_K_Software_Developer_Resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-full"
+>
+  <Button
+    size="lg"
+    className="w-full bg-accent hover:bg-accent/90 text-accent-foreground gap-2"
+  >
+    <Download className="w-4 h-4" />
+    Resume (PDF)
+  </Button>
+</a>
+
           </div>
         </div>
       </div>
