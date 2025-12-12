@@ -66,7 +66,8 @@ export default function About() {
               </div>
             </Card>
 
-           <a href="/Akash_K_Software_Developer_Resume.pdf"
+         <a
+  href="/Akash_K_Software_Developer_Resume.pdf"
   download="Akash_K_Software_Developer_Resume.pdf"
   target="_blank"
   rel="noopener noreferrer"
@@ -80,6 +81,7 @@ export default function About() {
     Resume (PDF)
   </Button>
 </a>
+
 
           </div>
         </div>
