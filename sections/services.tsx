@@ -36,9 +36,9 @@ const services = [
 
 export default function Services() {
     return (
-        <section id="services" className="py-24 px-4 sm:px-6 lg:px-8">
+        <section id="services" className="py-20 px-4 sm:px-6 lg:px-8">
             <div className="max-w-6xl mx-auto">
-                <div className="mb-16 text-center">
+                <div className="mb-12 text-center">
                     <h2 className="section-title mx-auto inline-block text-center w-full">Services & Expertise</h2>
                     <div className="section-accent mx-auto"></div>
                     <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -46,9 +46,9 @@ export default function Services() {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-hidden pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide">
                     {services.map((service, idx) => (
-                        <Card key={idx} className="premium-card p-8 group hover:bg-accent/5 transition-colors duration-500">
+                        <Card key={idx} className="premium-card p-7 group hover:bg-accent/5 transition-colors duration-500 min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-center">
                             <div className="space-y-4">
                                 <div className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center group-hover:bg-accent group-hover:border-accent transition-all duration-300">
                                     <service.icon className="w-7 h-7 text-accent group-hover:text-background" />
@@ -62,7 +62,7 @@ export default function Services() {
                     ))}
                 </div>
 
-                <div className="mt-16 p-8 rounded-3xl bg-accent/5 border border-accent/20 text-center space-y-4">
+                <div className="mt-12 p-8 rounded-3xl bg-accent/5 border border-accent/20 text-center space-y-4">
                     <h4 className="text-2xl font-black uppercase tracking-tight">Ready to innovate together?</h4>
                     <p className="text-muted-foreground">I am passionate about solving complex challenges with AI and modern software architecture.</p>
                     <div className="pt-2">

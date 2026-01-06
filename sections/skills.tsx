@@ -45,9 +45,9 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-4 sm:px-6 lg:px-8">
+    <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-12">
           <h2 className="section-title">Technical Expertise</h2>
           <div className="section-accent"></div>
           <p className="text-muted-foreground text-lg max-w-2xl">
@@ -55,11 +55,11 @@ export default function Skills() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto md:overflow-hidden pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide">
           {skillCategories.map((category, idx) => (
             <Card
               key={idx}
-              className="premium-card p-6 sm:p-8 group overflow-hidden relative"
+              className="premium-card p-6 sm:p-7 group overflow-hidden relative min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-center"
             >
               {/* Background Icon Decoration */}
               <category.icon className="absolute -right-4 -bottom-4 w-32 h-32 text-accent/5 -rotate-12 group-hover:scale-110 group-hover:text-accent/10 transition-all duration-500" />

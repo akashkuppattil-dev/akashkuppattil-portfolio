@@ -22,9 +22,9 @@ const mindsets = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/[0.02]">
+    <section id="about" className="py-20 px-4 sm:px-6 lg:px-8 bg-card/[0.02]">
       <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
           <div>
             <h2 className="section-title">Professional Mindset</h2>
             <div className="section-accent"></div>
@@ -34,9 +34,9 @@ export default function About() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-6 mb-12">
           {mindsets.map((item, idx) => (
-            <Card key={idx} className="premium-card p-6 sm:p-8 space-y-4">
+            <Card key={idx} className="premium-card p-6 sm:p-7 space-y-4">
               <div className="w-14 h-14 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center">
                 <item.icon className="w-7 h-7 text-accent" />
               </div>
@@ -48,7 +48,7 @@ export default function About() {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 items-start">
           <div className="lg:col-span-3 space-y-8">
             <div className="space-y-6 text-base sm:text-lg leading-relaxed text-muted-foreground">
               <p className="text-foreground font-medium">

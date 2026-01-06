@@ -35,21 +35,21 @@ const experiences = [
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8 bg-card/50">
+    <section id="experience" className="py-16 px-4 sm:px-6 lg:px-8 bg-card/50">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-2">Professional Experience</h2>
           <div className="w-12 h-1 bg-accent rounded"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
           {experiences.map((exp, idx) => (
             <div key={idx} className="relative">
               {/* Timeline connector (hidden on mobile, shown on desktop) */}
               <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-[2px] bg-accent/20 ml-6"></div>
 
               {/* Content */}
-              <Card className="p-6 sm:p-8 lg:ml-24 premium-card group">
+              <Card className="p-6 sm:p-7 lg:ml-24 premium-card group">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                   <div className="space-y-1">
                     <h3 className="text-xl font-black uppercase tracking-tight">{exp.title}</h3>

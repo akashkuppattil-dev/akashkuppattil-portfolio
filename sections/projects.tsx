@@ -45,9 +45,9 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 lg:px-8 bg-card/[0.02]">
+    <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-card/[0.02]">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-16">
+        <div className="mb-12">
           <h2 className="section-title">Case Studies</h2>
           <div className="section-accent"></div>
           <p className="text-muted-foreground text-lg max-w-2xl">
@@ -55,9 +55,9 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="space-y-24">
+        <div className="space-y-20">
           {projects.map((project, idx) => (
-            <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-12 items-center`}>
+            <div key={idx} className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-10 items-center`}>
               {/* Image side */}
               <div className="flex-1 w-full order-last lg:order-none">
                 <div className="relative group overflow-hidden rounded-2xl border border-border/50 shadow-2xl shadow-accent/5">

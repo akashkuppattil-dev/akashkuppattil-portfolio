@@ -23,13 +23,12 @@ export default function Hero() {
       </div>
 
       <div className="max-w-5xl mx-auto w-full px-4 animate-fade-in relative z-10 flex flex-col items-center">
-        {/* Floating Tag */}
-        <div className="mb-8 p-[1px] rounded-full bg-gradient-to-r from-accent/50 to-primary/50 animate-slide-up">
-          <div className="px-4 py-1.5 rounded-full bg-background/90 backdrop-blur-sm">
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">
-              Architecting the Intelligent Web
-            </p>
-          </div>
+        {/* Welcome Text */}
+        <div className="mb-4 animate-slide-up flex items-center gap-2">
+          <span className="text-lg">👋</span>
+          <p className="text-[12px] md:text-[14px] font-black uppercase tracking-[0.4em] text-accent">
+            Hi, I'm Akash K — Welcome to my digital workspace
+          </p>
         </div>
 
         {/* Impactful Headline */}

@@ -36,12 +36,15 @@ export default function Navigation() {
           {/* Logo */}
           <div
             className="flex items-center gap-2 group cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              setMobileOpen(false);
+            }}
           >
             <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-background shadow-lg shadow-accent/20 transition-transform group-hover:scale-110">
               <Code2 className="w-5 h-5 transition-transform group-hover:rotate-12" />
             </div>
-            <span className="text-lg font-black tracking-tighter uppercase hidden sm:block">
+            <span className="text-lg font-black tracking-tighter uppercase">
               Akash <span className="text-accent underline decoration-accent/30 underline-offset-4">K</span>
             </span>
           </div>
