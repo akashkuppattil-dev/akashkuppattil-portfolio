@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Download, ArrowRight } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 
 export default function Hero() {
   const handleViewProjects = () => {
@@ -12,7 +12,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center pt-16 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       {/* Premium Background Elements */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_50%_50%,_var(--accent)_0%,_transparent_50%)] opacity-[0.05]"></div>
