@@ -1,102 +1,72 @@
-import { Github, Linkedin, Mail, Code2, Instagram } from "lucide-react"
+"use client"
+
+import { Code2, Github, Linkedin, Instagram, Twitter, Facebook } from "lucide-react"
+import { motion } from "framer-motion"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t border-border/50 bg-card/[0.03] py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
-          {/* Brand */}
-          <div className="space-y-4 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <Code2 className="w-5 h-5 text-accent" />
-              <h3 className="text-xl font-black tracking-tighter uppercase">Akash K</h3>
+    <footer className="bg-background border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-accent/50 to-transparent"></div>
+
+      <div className="max-w-7xl mx-auto flex flex-col items-center">
+        {/* Top Section */}
+        <div className="w-full flex flex-col md:flex-row justify-between items-center gap-12 mb-16">
+          <div className="flex flex-col items-center md:items-start gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-background">
+                <Code2 className="w-6 h-6" />
+              </div>
+              <span className="text-2xl font-black tracking-tighter uppercase">
+                Akash <span className="text-accent underline decoration-accent/30 decoration-4 underline-offset-4">K</span>
+              </span>
             </div>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              Engineering high-performance software solutions for business challenges. Based in Calicut, India.
+            <p className="text-muted-foreground text-sm font-medium max-w-xs text-center md:text-left">
+              Architecting high-performance digital systems with human-centric design.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-foreground mb-6">Navigation</h4>
-            <ul className="space-y-3 text-sm">
-              {[
-                { name: "About", href: "#about" },
-                { name: "Skills", href: "#skills" },
-                { name: "Services", href: "#services" },
-                { name: "Projects", href: "#projects" },
-              ].map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="text-muted-foreground hover:text-accent transition-colors font-medium border-b border-transparent hover:border-accent"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Tech */}
-          <div>
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-foreground mb-6">Technologies</h4>
-            <ul className="space-y-3 text-sm">
-              {["Python / Django", "Next.js / React", "NestJS / Node", "PostgreSQL / MySQL"].map((tech) => (
-                <li key={tech} className="text-muted-foreground font-medium">
-                  {tech}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Social */}
-          <div className="space-y-6">
-            <h4 className="text-xs font-black uppercase tracking-[0.2em] text-foreground mb-6">Social Connect</h4>
-            <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
+            {[
+              { icon: Github, href: "https://github.com/akashkuppattil-dev" },
+              { icon: Linkedin, href: "https://linkedin.com/in/akash-k-developer" },
+              { icon: Instagram, href: "https://instagram.com/akash__kuppattil" },
+              { icon: Facebook, href: "#" },
+              { icon: Twitter, href: "#", isX: true }
+            ].map((social, i) => (
               <a
-                href="https://github.com/akashkuppattil-dev"
+                key={i}
+                href={social.href}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 transition-all flex items-center justify-center text-accent hover:bg-accent hover:text-background shadow-lg shadow-accent/5"
+                className="w-12 h-12 rounded-xl glass border border-white/5 flex items-center justify-center text-muted-foreground hover:text-accent hover:border-accent/30 hover:bg-accent/5 transition-all duration-300"
               >
-                <Github className="w-5 h-5" />
+                {social.isX ? (
+                  <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                  </svg>
+                ) : (
+                  <social.icon className="w-5 h-5" />
+                )}
               </a>
-              <a
-                href="https://linkedin.com/in/akash-k-developer"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 transition-all flex items-center justify-center text-accent hover:bg-accent hover:text-background shadow-lg shadow-accent/5"
-              >
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a
-                href="https://instagram.com/akash__kuppattil"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 transition-all flex items-center justify-center text-accent hover:bg-accent hover:text-background shadow-lg shadow-accent/5"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a
-                href="mailto:akashskuppattil@gmail.com"
-                className="w-10 h-10 rounded-xl bg-accent/10 border border-accent/20 transition-all flex items-center justify-center text-accent hover:bg-accent hover:text-background shadow-lg shadow-accent/5"
-              >
-                <Mail className="w-5 h-5" />
-              </a>
-            </div>
+            ))}
           </div>
         </div>
 
-        {/* Copyright */}
-        <div className="pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-bold uppercase tracking-widest text-muted-foreground/60">
-          <p>© {currentYear} AKASH K — Software Developer</p>
-          <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-accent transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-accent transition-colors">Built with Next.js 16</a>
+        {/* Bottom Section */}
+        <div className="w-full pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">
+            © {currentYear} Lumora Triad. All rights reserved.
+          </p>
+          <div className="flex gap-8">
+            <a href="#hero" className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em] hover:text-accent transition-colors">Back to top</a>
+            <a href="#" className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em] hover:text-accent transition-colors">Privacy Policy</a>
           </div>
+        </div>
+
+        {/* Brand Text Background */}
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 select-none pointer-events-none opacity-[0.02]">
+          <h1 className="text-[15rem] font-black tracking-tighter uppercase leading-none text-foreground whitespace-nowrap">AKASH KUPPATTIL</h1>
         </div>
       </div>
     </footer>
