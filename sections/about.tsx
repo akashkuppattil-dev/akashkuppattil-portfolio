@@ -38,7 +38,7 @@ export default function About() {
                 <Sparkles className="w-4 h-4" />
                 <span className="text-[10px] font-black uppercase tracking-[0.4em]">The Philosophy</span>
               </div>
-              <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
+              <h2 className="text-4xl xs:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
                 Crafting <br />
                 <span className="text-accent italic">Intelligence</span>
               </h2>
@@ -84,7 +84,7 @@ export default function About() {
           viewport={{ once: true }}
           className="text-center max-w-4xl mx-auto pt-20 border-t border-white/5"
         >
-          <p className="text-2xl md:text-4xl font-black text-foreground leading-[1.1] uppercase tracking-tighter">
+          <p className="text-xl xs:text-2xl md:text-4xl font-black text-foreground leading-[1.1] uppercase tracking-tighter">
             Transforming complex data into <span className="text-accent italic">beautiful user stories</span> and high-performance applications.
           </p>
         </motion.div>

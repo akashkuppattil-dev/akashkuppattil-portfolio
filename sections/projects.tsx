@@ -107,7 +107,7 @@ export default function Projects() {
             <Sparkles className="w-4 h-4" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em]">Featured Work</span>
           </motion.div>
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] drop-shadow-sm">
+          <h2 className="text-4xl xs:text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] drop-shadow-sm">
             Case <span className="text-accent italic">Studies</span>
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl font-medium">
@@ -144,7 +144,7 @@ export default function Projects() {
                   <Badge variant="outline" className="text-accent border-accent/20 tracking-widest uppercase text-[10px] px-5 py-2 font-black glass-card">
                     {project.category}
                   </Badge>
-                  <h3 className="text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none group">
+                  <h3 className="text-3xl xs:text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none group">
                     <span className="bg-left-bottom bg-gradient-to-r from-accent to-accent bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 pb-2">
                       {project.title}
                     </span>

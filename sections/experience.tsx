@@ -48,7 +48,7 @@ export default function Experience() {
             <Workflow className="w-4 h-4" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em]">Professional Path</span>
           </motion.div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
+          <h2 className="text-4xl xs:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
             Career <span className="text-accent italic">Architecture</span>
           </h2>
         </div>

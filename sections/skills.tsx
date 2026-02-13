@@ -41,7 +41,7 @@ export default function Skills() {
               <Sparkles className="w-4 h-4" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em]">The Technical Spectrum</span>
             </div>
-            <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
+            <h2 className="text-4xl xs:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.9]">
               Technical <br />
               <span className="text-accent italic">Arsenal</span>
             </h2>

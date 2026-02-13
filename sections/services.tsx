@@ -53,7 +53,7 @@ export default function Services() {
                             <Zap className="w-4 h-4 fill-accent/20" />
                             <span className="text-[10px] font-black uppercase tracking-[0.4em]">Service Portfolio</span>
                         </div>
-                        <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
+                        <h2 className="text-4xl xs:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
                             Expert <br />
                             <span className="text-accent italic">Services</span>
                         </h2>
@@ -103,7 +103,7 @@ export default function Services() {
                     className="mt-20 p-12 md:p-16 rounded-[3rem] glass-card border border-accent/20 text-center space-y-8 relative overflow-hidden"
                 >
                     <div className="relative z-10 space-y-6">
-                        <h4 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">
+                        <h4 className="text-2xl xs:text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none">
                             Ready to <span className="text-accent italic">Incorporate</span> AI?
                         </h4>
                         <div className="">
