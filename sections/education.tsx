@@ -22,50 +22,56 @@ const education = [
 
 export default function Education() {
   return (
-    <section id="education" className="py-32 px-4 sm:px-6 lg:px-8 bg-background relative overflow-hidden">
-      <div className="max-w-6xl mx-auto">
-        <div className="mb-24 space-y-4 text-center">
+    <section id="education" className="py-24 px-4 sm:px-6 bg-background relative overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="mb-20 flex flex-col items-center text-center space-y-4">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="flex items-center justify-center gap-2 text-accent"
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="flex items-center gap-2 text-accent px-4 py-1.5 glass border border-accent/20 rounded-full"
           >
-            <GraduationCap className="w-5 h-5" />
-            <span className="text-[10px] font-black uppercase tracking-[0.4em]">Academic Foundation</span>
+            <GraduationCap className="w-4 h-4" />
+            <span className="text-[10px] font-black uppercase tracking-[0.3em]">Academic Core</span>
           </motion.div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tight uppercase leading-none">
+          <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
             Education <span className="text-accent italic">Journey</span>
           </h2>
-          <div className="w-24 h-1 bg-accent mx-auto rounded-full"></div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {education.map((edu, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, x: idx % 2 === 0 ? -30 : 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
+              transition={{ delay: idx * 0.1 }}
             >
-              <Card className="p-10 glass border border-white/10 group hover:border-accent/30 transition-all duration-500 relative overflow-hidden">
-                <div className="absolute top-0 right-0 p-8 opacity-[0.03] group-hover:opacity-[0.08] transition-opacity">
-                  <GraduationCap className="w-32 h-32 rotate-12" />
+              <Card className="p-10 glass-card border border-white/5 group relative overflow-hidden h-full">
+                <div className="absolute top-0 right-0 p-10 opacity-[0.02] group-hover:opacity-[0.06] transition-all transform group-hover:rotate-12 group-hover:scale-110">
+                  <GraduationCap className="w-48 h-48" />
                 </div>
 
-                <div className="relative z-10 space-y-8">
-                  <div className="space-y-4">
-                    <Badge className="bg-accent/10 text-accent border-accent/20 px-4 py-1.5 text-[9px] font-black uppercase tracking-widest rounded-lg">
+                <div className="relative z-10 space-y-10 flex flex-col h-full">
+                  <div className="space-y-6">
+                    <Badge variant="outline" className="text-accent border-accent/30 tracking-widest uppercase text-[10px] px-5 py-2 font-black glass">
                       {edu.status}
                     </Badge>
-                    <h3 className="text-3xl md:text-4xl font-black text-foreground uppercase tracking-tight leading-none group-hover:text-accent transition-colors">{edu.degree}</h3>
-                    <p className="text-xl text-muted-foreground font-bold italic">{edu.institution}</p>
+                    <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-none group-hover:text-accent transition-colors">
+                      {edu.degree}
+                    </h3>
+                    <p className="text-xl text-muted-foreground font-black italic">{edu.institution}</p>
                   </div>
 
-                  <div className="flex items-center gap-4 pt-6 border-t border-white/5">
-                    <div className="w-12 h-12 rounded-xl bg-accent/5 flex items-center justify-center">
-                      <Calendar className="w-6 h-6 text-accent" />
+                  <div className="mt-auto flex items-center gap-5 pt-10 border-t border-white/5">
+                    <div className="w-14 h-14 rounded-2xl bg-accent/5 flex items-center justify-center border border-accent/10">
+                      <Calendar className="w-7 h-7 text-accent" />
                     </div>
-                    <span className="text-lg font-black uppercase tracking-widest text-foreground/80">{edu.period}</span>
+                    <div>
+                      <p className="text-[10px] font-black uppercase tracking-widest text-accent mb-0.5">Duration</p>
+                      <p className="text-xl font-black uppercase tracking-tight text-foreground">{edu.period}</p>
+                    </div>
                   </div>
                 </div>
               </Card>

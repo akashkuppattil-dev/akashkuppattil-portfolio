@@ -1,7 +1,7 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Download, Sparkles } from "lucide-react"
+import { ArrowRight, Download, Sparkles, Layout, Database, Zap } from "lucide-react"
 import { motion } from "framer-motion"
 
 export default function Hero() {
@@ -22,124 +22,117 @@ export default function Hero() {
   }
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+    hidden: { y: 20, opacity: 0, filter: "blur(5px)" },
+    visible: { y: 0, opacity: 1, filter: "blur(0px)", transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
   }
 
   return (
     <section
       id="hero"
-      className="min-h-[100vh] flex items-center justify-center pt-20 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden bg-background"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden bg-background py-20 px-4 sm:px-6"
     >
-      {/* Dynamic Background */}
-      <div className="absolute inset-0 -z-10 bg-grid opacity-[0.03]"></div>
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <motion.div
-          animate={{ x: [0, 100, 0], y: [0, -50, 0] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-accent/10 rounded-full blur-[120px]"
-        />
-        <motion.div
-          animate={{ x: [0, -100, 0], y: [0, 50, 0] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
-        />
-      </div>
+      {/* Dynamic Background Elements */}
+      <div className="absolute inset-0 -z-30 bg-background"></div>
+      <div className="absolute inset-0 -z-20 bg-grid opacity-[0.03] mask-radial"></div>
+      <div className="absolute inset-0 -z-10 noise pointer-events-none"></div>
+
+      {/* Floating Ambient Glows */}
+      <div className="absolute top-1/4 left-1/4 w-[30vw] h-[30vw] min-w-[300px] bg-accent/20 rounded-full blur-[150px] animate-pulse-slow pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[25vw] h-[25vw] min-w-[250px] bg-primary/20 rounded-full blur-[150px] animate-pulse-slow [animation-delay:2s] pointer-events-none" />
 
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="max-w-6xl mx-auto w-full px-4 relative z-10 flex flex-col items-center text-center"
+        className="w-full max-w-5xl mx-auto flex flex-col items-center text-center space-y-10"
       >
-        {/* Badge */}
+        {/* Modern Status Badge */}
         <motion.div
           variants={itemVariants}
-          className="mb-8 flex items-center gap-2 px-4 py-1.5 rounded-full glass border border-accent/20 text-accent"
+          className="px-6 py-2.5 rounded-2xl glass border border-accent/20 flex items-center gap-4 group hover:border-accent/40 transition-all cursor-default"
         >
-          <Sparkles className="w-3.5 h-3.5 fill-accent/20" />
-          <span className="text-[10px] sm:text-[12px] font-black uppercase tracking-[0.3em]">
-            Available for Design & Development 2026
+          <div className="relative flex items-center justify-center">
+            <div className="w-2.5 h-2.5 rounded-full bg-accent animate-ping absolute"></div>
+            <div className="w-2.5 h-2.5 rounded-full bg-accent relative"></div>
+          </div>
+          <span className="text-[10px] sm:text-xs font-black uppercase tracking-[0.3em] text-accent">
+            Open for High-Impact Projects <span className="text-accent/40 ml-2 hidden sm:inline">2026</span>
           </span>
         </motion.div>
 
-        {/* Headline */}
-        <motion.div variants={itemVariants} className="space-y-2 mb-10 w-full overflow-hidden">
-          <h1 className="text-4xl sm:text-7xl md:text-8xl lg:text-[10rem] font-black tracking-tighter leading-[0.8] uppercase flex flex-col items-center">
-            <span className="block text-foreground drop-shadow-2xl">Creative</span>
-            <span className="flex items-center gap-2 sm:gap-4 text-accent italic">
-              <span className="h-[1px] md:h-[2px] w-8 md:w-32 bg-accent/30 rounded-full hidden xs:block"></span>
-              Fullstack
-              <span className="h-[1px] md:h-[2px] w-8 md:w-32 bg-accent/30 rounded-full hidden xs:block"></span>
+        {/* Cinematic Headline */}
+        <motion.div variants={itemVariants} className="space-y-4">
+          <h1 className="text-6xl sm:text-8xl md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-tighter uppercase relative">
+            <span className="block drop-shadow-2xl">Creative</span>
+            <span className="block text-accent italic relative">
+              Software
+              <Sparkles className="absolute -top-4 -right-8 w-8 h-8 md:w-12 md:h-12 text-accent animate-pulse" />
             </span>
-            <span className="block text-transparent bg-clip-text bg-gradient-to-b from-foreground to-foreground/30">Developer</span>
+            <span className="block text-foreground/30">Engineer</span>
           </h1>
         </motion.div>
 
-        {/* Hero Card */}
+        {/* Refined Bio Section */}
         <motion.div
           variants={itemVariants}
-          className="max-w-3xl w-full p-8 md:p-12 rounded-[2.5rem] glass border border-white/10 shadow-3xl text-center mb-12 relative group"
+          className="max-w-2xl w-full p-8 sm:p-12 rounded-[2.5rem] glass-card relative group overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent rounded-[2.5rem] -z-10 group-hover:opacity-100 transition-opacity opacity-50"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-accent/[0.05] via-transparent to-transparent opacity-50"></div>
 
-          <p className="text-base md:text-2xl text-muted-foreground leading-relaxed font-medium px-2 md:px-4">
-            Hi, I'm <span className="text-foreground font-black underline decoration-accent/40 decoration-4 underline-offset-4">Akash K</span>.
-            I craft immersive digital experiences where <span className="text-accent italic">stunning visuals</span> meet
-            <span className="text-primary font-bold"> high-performance</span> code.
-          </p>
+          <div className="relative z-10 flex flex-col gap-8">
+            <p className="text-xl sm:text-2xl md:text-3xl text-foreground font-medium leading-tight text-center md:text-left">
+              Hey, I'm <span className="font-black text-accent">Akash K</span>. I engineer <span className="underline decoration-accent/40 decoration-8 underline-offset-8">intelligent production systems</span> where performance meets high-end aesthetics.
+            </p>
 
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            {["Next.js", "AI Integration", "Premium UX", "Software Architecture"].map((tag, i) => (
-              <span key={i} className="px-4 py-1.5 rounded-xl bg-accent/5 border border-accent/10 text-[9px] font-black uppercase tracking-widest text-accent/80">
-                {tag}
-              </span>
-            ))}
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-4">
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-accent group-hover:border-accent/30 transition-all">
+                <Zap className="w-4 h-4 text-accent" /> Full-Stack
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-accent group-hover:border-accent/30 transition-all">
+                <Layout className="w-4 h-4 text-accent" /> UI/UX
+              </div>
+              <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-muted-foreground group-hover:text-accent group-hover:border-accent/30 transition-all">
+                <Database className="w-4 h-4 text-accent" /> AI Systems
+              </div>
+            </div>
           </div>
         </motion.div>
 
-        {/* CTAs */}
+        {/* Action Buttons */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto"
+          className="flex flex-col sm:flex-row gap-4 w-full max-w-md pt-4"
         >
           <Button
             size="lg"
-            className="h-16 px-12 bg-accent hover:bg-accent/90 text-accent-foreground gap-4 text-xs font-black uppercase tracking-[0.2em] rounded-[1.25rem] shadow-2xl shadow-accent/20 group relative overflow-hidden"
+            className="h-16 px-10 bg-accent hover:bg-accent/90 text-accent-foreground gap-3 text-xs font-black uppercase tracking-[0.2em] rounded-2xl shadow-2xl shadow-accent/20 group w-full sm:flex-1"
             onClick={handleViewProjects}
           >
-            <motion.div
-              whileHover={{ x: 5 }}
-              className="flex items-center gap-3"
-            >
-              Start Exploring <ArrowRight className="w-5 h-5" />
-            </motion.div>
+            Launch Case Studies <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
 
-          <a href="/Akash_K_Software_Developer_Resume.pdf" download className="w-full sm:w-auto">
+          <a href="/Akash_K_Software_Developer_Resume.pdf" download className="w-full sm:flex-1">
             <Button
               variant="outline"
               size="lg"
-              className="w-full h-16 px-12 text-xs font-black uppercase tracking-[0.2em] rounded-[1.25rem] border-white/10 glass hover:bg-accent/5 transition-all flex gap-3"
+              className="w-full h-16 px-10 text-xs font-black uppercase tracking-[0.2em] rounded-2xl border-white/10 glass hover:bg-accent/5 gap-3 group"
             >
-              <Download className="w-5 h-5" /> Download CV
+              <Download className="w-4 h-4 group-hover:translate-y-1 transition-transform" /> Resume
             </Button>
           </a>
         </motion.div>
-      </motion.div>
 
-      {/* Floating Elements for 3D Feel */}
-      <motion.div
-        animate={{ y: [0, -30, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-[20%] right-[10%] w-24 h-24 border border-accent/20 rounded-2xl rotate-12 hidden lg:block glass"
-      />
-      <motion.div
-        animate={{ y: [0, 30, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-[20%] left-[10%] w-16 h-16 border border-primary/20 rounded-full hidden lg:block glass"
-      />
+        {/* Scroll Indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 2, duration: 1 }}
+          className="pt-16 sm:pt-24 flex flex-col items-center gap-4"
+        >
+          <div className="w-[1px] h-16 bg-gradient-to-b from-accent/50 to-transparent"></div>
+          <span className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground animate-bounce">Scroll to Explore</span>
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
-

@@ -1,18 +1,18 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Code2, Menu, Moon, Sun, X } from "lucide-react"
+import { Code2, Menu, Moon, Sun, X, Info, Box, Cpu, Workflow, Layers, Mail } from "lucide-react"
 import { useTheme } from "next-themes"
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Services", href: "#services" },
-  { name: "Experience", href: "#experience" },
-  { name: "Projects", href: "#projects" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "#about", icon: Info },
+  { name: "Skills", href: "#skills", icon: Cpu },
+  { name: "Services", href: "#services", icon: Layers },
+  { name: "Experience", href: "#experience", icon: Workflow },
+  { name: "Projects", href: "#projects", icon: Box },
+  { name: "Contact", href: "#contact", icon: Mail },
 ]
 
 export default function Navigation() {
@@ -40,56 +40,61 @@ export default function Navigation() {
   }, [])
 
   const menuVariants = {
-    closed: { x: "100%", transition: { type: "spring", stiffness: 400, damping: 40 } },
-    open: { x: 0, transition: { type: "spring", stiffness: 400, damping: 40 } },
+    closed: {
+      x: "100%",
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+        staggerChildren: 0.05,
+        staggerDirection: -1
+      }
+    },
+    open: {
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+        staggerChildren: 0.1,
+        delayChildren: 0.2
+      }
+    },
   }
 
   const linkVariants = {
-    closed: { opacity: 0, x: 20 },
-    open: (i: number) => ({
+    closed: { opacity: 0, x: 50, filter: "blur(10px)" },
+    open: {
       opacity: 1,
       x: 0,
-      transition: { delay: i * 0.1 + 0.3 },
-    }),
+      filter: "blur(0px)",
+      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+    },
   }
 
   return (
     <>
       <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-700 ${headerVisible ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? "py-4" : "py-6"}`}
+        className={`fixed top-0 w-full z-50 transition-all duration-700 ${headerVisible ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? "py-4 sm:py-6" : "py-6 sm:py-8"}`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className={`flex justify-between items-center glass p-2 px-6 rounded-2xl border-white/5 shadow-2xl transition-all duration-500 ${scrolled ? "bg-background/80" : "bg-transparent border-transparent shadow-none"}`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className={`flex justify-between items-center glass p-2 px-4 sm:px-6 rounded-[1.25rem] border-white/5 shadow-2xl transition-all duration-500 ${scrolled ? "bg-background/80" : "bg-transparent border-transparent shadow-none"}`}>
             {/* Logo */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               className="flex items-center gap-2 group cursor-pointer"
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             >
-              <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-background shadow-xl shadow-accent/20">
-                <Code2 className="w-6 h-6 transition-transform group-hover:rotate-12" />
+              <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-background shadow-lg shadow-accent/20">
+                <Code2 className="w-5 h-5 transition-transform group-hover:rotate-12" />
               </div>
-              <span className="text-xl font-black tracking-tighter uppercase hidden sm:block">
-                Akash <span className="text-accent underline decoration-accent/30 underline-offset-4 decoration-4">K</span>
+              <span className="text-lg font-black tracking-tighter uppercase block">
+                Akash <span className="text-accent">K</span>
               </span>
             </motion.div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  className="text-[10px] font-black uppercase tracking-[0.2em] text-foreground/60 hover:text-accent transition-colors relative group"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
-                </a>
-              ))}
-            </div>
-
             {/* Controls */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               {mounted && (
                 <Button
                   variant="ghost"
@@ -100,12 +105,12 @@ export default function Navigation() {
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={theme}
-                      initial={{ opacity: 0, rotate: -90 }}
-                      animate={{ opacity: 1, rotate: 0 }}
-                      exit={{ opacity: 0, rotate: 90 }}
-                      transition={{ duration: 0.2 }}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.8 }}
+                      transition={{ duration: 0.15 }}
                     >
-                      {theme === "dark" ? <Sun className="w-5 h-5 text-accent" /> : <Moon className="w-5 h-5 text-accent" />}
+                      {theme === "dark" ? <Sun className="w-4 h-4 text-accent" /> : <Moon className="w-4 h-4 text-accent" />}
                     </motion.div>
                   </AnimatePresence>
                 </Button>
@@ -113,11 +118,13 @@ export default function Navigation() {
 
               <Button
                 variant="ghost"
-                size="icon"
-                className="w-10 h-10 rounded-xl hover:bg-accent/10"
+                className="group h-11 px-4 rounded-xl bg-accent/10 border border-accent/20 hover:bg-accent transition-all duration-300"
                 onClick={() => setSideMenuOpen(true)}
               >
-                <Menu className="w-7 h-7 text-accent" />
+                <div className="flex items-center gap-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-accent group-hover:text-background transition-colors hidden xs:inline-block">Open Menu</span>
+                  <Menu className="w-5 h-5 text-accent group-hover:text-background transition-colors" />
+                </div>
               </Button>
             </div>
           </div>
@@ -133,51 +140,65 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSideMenuOpen(false)}
-              className="fixed inset-0 bg-background/80 backdrop-blur-md z-[60]"
+              className="fixed inset-0 bg-background/70 backdrop-blur-2xl z-[60]"
             />
             <motion.div
               variants={menuVariants}
               initial="closed"
               animate="open"
               exit="closed"
-              className="fixed right-0 top-0 h-full w-full sm:w-[450px] md:w-[500px] bg-background border-l border-white/5 z-[70] shadow-2xl p-6 sm:p-16 flex flex-col justify-between"
+              className="fixed right-0 top-0 h-full w-full sm:w-[480px] bg-background border-l border-white/5 z-[70] shadow-2xl p-6 sm:p-12 flex flex-col"
             >
-              <div className="space-y-10 sm:space-y-12">
-                <div className="flex justify-between items-center">
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-accent flex items-center justify-center text-background shadow-2xl shadow-accent/20">
-                    <Code2 className="w-6 h-6 sm:w-8 sm:h-8" />
+              <div className="flex justify-between items-center mb-12 sm:mb-16">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center text-background shadow-2xl">
+                    <Code2 className="w-6 h-6" />
                   </div>
-                  <Button variant="ghost" size="icon" onClick={() => setSideMenuOpen(false)} className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border border-white/5 hover:bg-accent/10">
-                    <X className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
-                  </Button>
-                </div>
-
-                <div className="space-y-6">
-                  {/* Removed "Navigation Menu" text as requested */}
-                  <div className="space-y-2 sm:space-y-4">
-                    {navLinks.map((link, i) => (
-                      <motion.a
-                        key={link.name}
-                        href={link.href}
-                        custom={i}
-                        variants={linkVariants}
-                        className="block text-5xl sm:text-7xl font-black uppercase tracking-tighter text-foreground hover:text-accent transition-all hover:translate-x-2 sm:hover:translate-x-4"
-                        onClick={() => setSideMenuOpen(false)}
-                      >
-                        {link.name}
-                      </motion.a>
-                    ))}
+                  <div>
+                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Portfolio</p>
+                    <p className="text-lg font-black uppercase tracking-tight">Main Menu</p>
                   </div>
                 </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setSideMenuOpen(false)}
+                  className="w-12 h-12 rounded-full border border-white/5 hover:bg-accent group active:scale-95 transition-all"
+                >
+                  <X className="w-5 h-5 text-accent group-hover:text-background" />
+                </Button>
               </div>
 
-              <div className="space-y-8">
-                <div className="h-[1px] w-full bg-gradient-to-r from-accent/50 to-transparent"></div>
-                <div className="flex flex-col gap-4">
-                  <p className="text-[10px] font-black text-muted-foreground uppercase tracking-[0.4em]">Let's Connect</p>
-                  <a href="mailto:akashskuppattil@gmail.com" className="text-xl font-bold hover:text-accent transition-colors break-all">
+              <div className="flex-grow space-y-1 overflow-y-auto px-2 custom-scrollbar">
+                {navLinks.map((link, i) => (
+                  <motion.div key={link.name} variants={linkVariants}>
+                    <a
+                      href={link.href}
+                      className="group flex items-center justify-between py-5 border-b border-white/[0.03] hover:border-accent/50 transition-all"
+                      onClick={() => setSideMenuOpen(false)}
+                    >
+                      <div className="flex items-center gap-6">
+                        <span className="text-[11px] font-black text-accent/30 group-hover:text-accent transition-colors">0{i + 1}</span>
+                        <span className="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-foreground group-hover:text-accent group-hover:translate-x-3 transition-all duration-400">
+                          {link.name}
+                        </span>
+                      </div>
+                      <link.icon className="w-5 h-5 text-accent/20 group-hover:text-accent transition-all opacity-0 group-hover:opacity-100" />
+                    </a>
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mt-auto p-6 rounded-[2rem] bg-accent/5 border border-accent/10 space-y-6">
+                <div className="space-y-2">
+                  <p className="text-[10px] font-black text-accent uppercase tracking-[0.4em]">Get in Touch</p>
+                  <a href="mailto:akashskuppattil@gmail.com" className="text-lg sm:text-xl font-black hover:text-accent transition-colors break-all underline decoration-accent/20 underline-offset-4 decoration-2">
                     akashskuppattil@gmail.com
                   </a>
+                </div>
+                <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-muted-foreground">
+                  <span>© 2026 AKASH K</span>
+                  <span className="text-accent italic">Calicut, IN</span>
                 </div>
               </div>
             </motion.div>
