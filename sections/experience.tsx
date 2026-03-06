@@ -12,12 +12,12 @@ const experiences = [
     period: "July 2025 – Nov 2025",
     location: "Remote",
     highlights: [
-      "Worked with Laravel & CodeIgniter frameworks",
-      "Built responsive UI components",
-      "Managed deployments with cPanel",
-      "Collaborated across design + backend teams",
+      "Developed and maintained web applications using Laravel & CodeIgniter frameworks",
+      "Built responsive, pixel-perfect UI components and integrated backend APIs",
+      "Managed deployments, domain setup and server config via cPanel",
+      "Collaborated across design and backend teams in an Agile delivery environment",
     ],
-    skills: ["PHP", "Laravel", "HTML", "CSS", "cPanel"],
+    skills: ["PHP", "Laravel", "CodeIgniter", "HTML/CSS", "cPanel", "MySQL"],
   },
   {
     title: "Software Developer Intern",
@@ -25,18 +25,18 @@ const experiences = [
     period: "Jan 2025 – May 2025",
     location: "Calicut, Kerala",
     highlights: [
-      "Full-stack development with React.js, NestJS, PostgreSQL",
-      "Implemented secure JWT + RBAC authentication",
-      "Performed API testing and validations",
-      "Participated in Agile/Scrum sprint planning",
+      "Full-stack development with React.js, NestJS & PostgreSQL — delivering production-ready modules",
+      "Implemented secure JWT + RBAC authentication architecture for enterprise-grade access control",
+      "Performed thorough API testing, schema validation and performance profiling",
+      "Participated in Agile/Scrum sprint planning, code reviews and retrospectives",
     ],
-    skills: ["React", "NestJS", "Postgres", "JWT", "Agile"],
+    skills: ["React", "NestJS", "PostgreSQL", "JWT", "RBAC", "TypeScript", "Agile/Scrum"],
   },
 ]
 
 export default function Experience() {
   return (
-    <section id="experience" className="py-24 px-4 bg-background relative overflow-hidden">
+    <section id="experience" className="py-24 px-4 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 flex flex-col items-center text-center space-y-4">
           <motion.div
@@ -51,9 +51,12 @@ export default function Experience() {
           <h2 className="text-4xl xs:text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
             Career <span className="text-accent italic">Architecture</span>
           </h2>
+          <p className="text-muted-foreground font-medium max-w-xl">
+            Real-world experience building production systems across full-stack and AI engineering roles.
+          </p>
         </div>
 
-        <div className="space-y-6 md:space-y-8">
+        <div className="flex flex-nowrap overflow-x-auto lg:block gap-5 lg:gap-0 lg:space-y-8 pb-8 lg:pb-0 snap-x snap-mandatory scrollbar-hide px-4 lg:px-0 -mx-4 lg:mx-0 mt-8 lg:mt-0">
           {experiences.map((exp, idx) => (
             <motion.div
               key={idx}
@@ -61,8 +64,9 @@ export default function Experience() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
+              className="w-[90vw] max-w-[400px] lg:w-auto lg:max-w-none flex-shrink-0 snap-center lg:snap-align-none"
             >
-              <Card className="p-8 md:p-12 glass-card border border-white/5 relative overflow-hidden group">
+              <Card className="p-8 md:p-12 glass-card border border-white/5 relative overflow-hidden group h-full">
                 <div className="absolute top-0 right-0 p-8 opacity-[0.02] group-hover:opacity-[0.05] group-hover:rotate-12 transition-all duration-700 pointer-events-none">
                   <Briefcase className="w-40 h-40 md:w-60 md:h-60" />
                 </div>
@@ -74,7 +78,7 @@ export default function Experience() {
                       {exp.location}
                     </Badge>
                     <div className="space-y-2">
-                      <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tighter leading-none">{exp.title}</h3>
+                      <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tighter leading-none">{exp.title}</h3>
                       <p className="text-xl text-accent font-black italic">{exp.company}</p>
                     </div>
                     <div className="flex items-center justify-center lg:justify-start gap-3 text-muted-foreground font-black uppercase tracking-widest text-[10px]">
@@ -87,7 +91,7 @@ export default function Experience() {
                   <div className="lg:w-2/3 space-y-10">
                     <ul className="space-y-4">
                       {exp.highlights.map((h, i) => (
-                        <li key={i} className="flex gap-4 text-lg md:text-xl text-foreground font-medium leading-tight text-left">
+                        <li key={i} className="flex gap-4 text-base md:text-lg text-foreground font-medium leading-relaxed text-left">
                           <Sparkles className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
                           <span>{h}</span>
                         </li>

@@ -16,7 +16,7 @@ const projects = [
     github: "https://github.com/akashkuppattil-dev",
     link: "https://akshy-car.vercel.app/",
     icon: Smartphone,
-    deviceType: "mobile" as const,
+    deviceType: "browser" as const,
     image: "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?q=80&w=2069&auto=format&fit=crop"
   },
   {
@@ -95,7 +95,7 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-24 px-4 sm:px-6 bg-background relative overflow-hidden">
+    <section id="projects" className="py-24 px-4 sm:px-6 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="mb-24 flex flex-col items-center text-center space-y-6">
           <motion.div
@@ -115,7 +115,7 @@ export default function Projects() {
           </p>
         </div>
 
-        <div className="space-y-32 md:space-y-48">
+        <div className="flex flex-nowrap overflow-x-auto sm:flex-col snap-x snap-mandatory sm:snap-none scrollbar-hide px-4 sm:px-0 -mx-4 sm:mx-0 gap-6 sm:gap-0 sm:space-y-32 md:space-y-48 pb-12 sm:pb-0 items-start sm:items-stretch">
           {projects.map((project, idx) => (
             <motion.div
               key={idx}
@@ -123,7 +123,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className={`flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-12 lg:gap-24 items-center`}
+              className={`w-[90vw] sm:w-auto flex-shrink-0 snap-center sm:snap-align-none flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 lg:gap-24 items-center`}
             >
               <div className="w-full lg:w-1/2 group relative">
                 {/* Backdrop Glow */}

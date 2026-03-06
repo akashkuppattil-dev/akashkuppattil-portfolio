@@ -1,206 +1,274 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { Code2, Menu, Moon, Sun, X, Info, Box, Cpu, Workflow, Layers, Mail } from "lucide-react"
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence, useScroll } from "framer-motion"
+import {
+  Code2, Moon, Sun, X, Sparkles,
+  User, Cpu, FolderKanban, Briefcase, BookOpen, Mail,
+  Download, Github, Linkedin, MapPin
+} from "lucide-react"
 import { useTheme } from "next-themes"
-import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 
-const navLinks = [
-  { name: "About", href: "#about", icon: Info },
-  { name: "Skills", href: "#skills", icon: Cpu },
-  { name: "Services", href: "#services", icon: Layers },
-  { name: "Experience", href: "#experience", icon: Workflow },
-  { name: "Projects", href: "#projects", icon: Box },
-  { name: "Contact", href: "#contact", icon: Mail },
+const NAV_LINKS = [
+  { name: "About", href: "#about", Icon: User },
+  { name: "Skills", href: "#skills", Icon: Cpu },
+  { name: "Projects", href: "#projects", Icon: FolderKanban },
+  { name: "Services", href: "#services", Icon: Briefcase },
+  { name: "Experience", href: "#experience", Icon: BookOpen },
+  { name: "Contact", href: "#contact", Icon: Mail },
 ]
 
 export default function Navigation() {
-  const [mounted, setMounted] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeSection, setActive] = useState("hero")
+  const [mounted, setMounted] = useState(false)
   const { theme, setTheme } = useTheme()
-  const [sideMenuOpen, setSideMenuOpen] = useState(false)
-  const [headerVisible, setHeaderVisible] = useState(true)
-  const lastScrollY = useRef(0)
+  const { scrollY } = useScroll()
+
+  const [hidden, setHidden] = useState(false)
+
+  useEffect(() => setMounted(true), [])
 
   useEffect(() => {
-    setMounted(true)
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-      const currentScrollY = window.scrollY
-      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-        setHeaderVisible(false)
-      } else if (currentScrollY < lastScrollY.current) {
-        setHeaderVisible(true)
+    return scrollY.on("change", (latest) => {
+      const prev = scrollY.getPrevious() || 0;
+      if (latest < 40) {
+        setHidden(false)
+        setScrolled(false)
+      } else if (latest > 40 && latest > prev) {
+        // Scrolling down
+        setHidden(true)
+        setScrolled(true)
+      } else {
+        // Scrolling up
+        setHidden(false)
+        setScrolled(true)
       }
-      lastScrollY.current = currentScrollY
-    }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    })
+  }, [scrollY])
+
+  useEffect(() => {
+    if (menuOpen) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = ""
+    return () => { document.body.style.overflow = "" }
+  }, [menuOpen])
+
+  useEffect(() => {
+    const ids = ["hero", "about", "skills", "projects", "services", "experience", "contact"]
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+      { threshold: 0.35 }
+    )
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el) })
+    return () => obs.disconnect()
   }, [])
 
-  const menuVariants = {
-    closed: {
-      x: "100%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-        staggerChildren: 0.05,
-        staggerDirection: -1
-      }
-    },
-    open: {
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    },
-  }
-
-  const linkVariants = {
-    closed: { opacity: 0, x: 50, filter: "blur(10px)" },
-    open: {
-      opacity: 1,
-      x: 0,
-      filter: "blur(0px)",
-      transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
-    },
+  const go = (href: string) => {
+    document.getElementById(href.replace("#", ""))?.scrollIntoView({ behavior: "smooth" })
+    setMenuOpen(false)
   }
 
   return (
     <>
-      <nav
-        className={`fixed top-0 w-full z-50 transition-all duration-700 ${headerVisible ? 'translate-y-0' : '-translate-y-full'} ${scrolled ? "py-4 sm:py-6" : "py-6 sm:py-8"}`}
+      {/* ════════════════════════════
+           DESKTOP HEADER
+         ════════════════════════════ */}
+      <motion.header
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: hidden ? -100 : 0, opacity: hidden ? 0 : 1 }}
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-6 left-0 right-0 z-[90] flex justify-center px-4 w-full pointer-events-none"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className={`flex justify-between items-center glass p-2 px-4 sm:px-6 rounded-[1.25rem] border-white/5 shadow-2xl transition-all duration-500 ${scrolled ? "bg-background/80" : "bg-transparent border-transparent shadow-none"}`}>
-            {/* Logo */}
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-2 group cursor-pointer"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
-              <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-background shadow-lg shadow-accent/20">
-                <Code2 className="w-5 h-5 transition-transform group-hover:rotate-12" />
-              </div>
-              <span className="text-lg font-black tracking-tighter uppercase block">
-                Akash <span className="text-accent">K</span>
-              </span>
-            </motion.div>
+        <div className="pointer-events-auto w-full max-w-[95vw] sm:max-w-max flex items-center justify-between gap-3 sm:gap-6 px-5 sm:px-6 py-2.5 sm:py-2.5 rounded-full bg-foreground/[0.03] backdrop-blur-3xl border border-border shadow-2xl">
 
-            {/* Controls */}
-            <div className="flex items-center gap-2">
-              {mounted && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="w-10 h-10 rounded-xl hover:bg-accent/10 transition-colors"
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={theme}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.8 }}
-                      transition={{ duration: 0.15 }}
-                    >
-                      {theme === "dark" ? <Sun className="w-4 h-4 text-accent" /> : <Moon className="w-4 h-4 text-accent" />}
-                    </motion.div>
-                  </AnimatePresence>
-                </Button>
-              )}
+          {/* Logo */}
+          <button onClick={() => go("#hero")} className="flex items-center gap-2 group flex-shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-[11px] font-bold uppercase tracking-widest text-foreground">Akash Kuppattil</span>
+          </button>
 
-              <Button
-                variant="ghost"
-                className="group h-11 px-4 rounded-xl bg-accent/10 border border-accent/20 hover:bg-accent transition-all duration-300"
-                onClick={() => setSideMenuOpen(true)}
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center gap-6 ml-4 mr-4 border-x border-border/50 px-6 overflow-x-auto scrollbar-hide">
+            {[
+              { name: "About", href: "#about" },
+              { name: "Skills", href: "#skills" },
+              { name: "Projects", href: "#projects" },
+              { name: "Experience", href: "#experience" },
+              { name: "Contact", href: "#contact" },
+            ].map((link) => (
+              <button
+                key={link.name}
+                onClick={() => go(link.href)}
+                className={`flex-shrink-0 relative text-[11px] font-semibold uppercase tracking-widest transition-colors ${activeSection === link.href.replace("#", "") ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  }`}
               >
-                <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-accent group-hover:text-background transition-colors hidden xs:inline-block">Open Menu</span>
-                  <Menu className="w-5 h-5 text-accent group-hover:text-background transition-colors" />
-                </div>
-              </Button>
-            </div>
+                {link.name}
+                {activeSection === link.href.replace("#", "") && (
+                  <motion.span
+                    layoutId="active-dot"
+                    className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-primary"
+                  />
+                )}
+              </button>
+            ))}
+          </nav>
+
+          {/* Right Controls */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="text-muted-foreground hover:text-foreground transition-colors"
+              aria-label="Toggle theme"
+            >
+              {mounted && (theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />)}
+            </button>
+
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setMenuOpen(true)}
+              className="md:hidden flex flex-col gap-1 items-center justify-center w-5 text-foreground"
+            >
+              <span className="w-full h-[1px] bg-foreground" />
+              <span className="w-full h-[1px] bg-foreground" />
+            </button>
           </div>
         </div>
-      </nav>
+      </motion.header>
 
-      {/* Full Screen Side Menu */}
+      {/* ════════════════════════════
+           MOBILE APP-STYLE DRAWER
+         ════════════════════════════ */}
       <AnimatePresence>
-        {sideMenuOpen && (
+        {menuOpen && (
           <>
+            {/* Backdrop */}
             <motion.div
+              key="backdrop"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSideMenuOpen(false)}
-              className="fixed inset-0 bg-background/70 backdrop-blur-2xl z-[60]"
+              onClick={() => setMenuOpen(false)}
+              className="fixed inset-0 z-[95] bg-black/60 backdrop-blur-sm lg:hidden"
             />
+
+            {/* Slide-up drawer */}
             <motion.div
-              variants={menuVariants}
-              initial="closed"
-              animate="open"
-              exit="closed"
-              className="fixed right-0 top-0 h-full w-full sm:w-[480px] bg-background border-l border-white/5 z-[70] shadow-2xl p-6 sm:p-12 flex flex-col"
+              key="drawer"
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", stiffness: 350, damping: 35 }}
+              className="fixed bottom-0 left-0 right-0 z-[96] lg:hidden rounded-t-[2rem] bg-transparent border-t border-foreground/10 shadow-2xl shadow-black/40 overflow-hidden"
+              style={{ maxHeight: "92vh" }}
             >
-              <div className="flex justify-between items-center mb-12 sm:mb-16">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center text-background shadow-2xl">
-                    <Code2 className="w-6 h-6" />
+              {/* Drag handle */}
+              <div className="flex justify-center pt-4 pb-2">
+                <div className="w-10 h-1 rounded-full bg-foreground/20" />
+              </div>
+
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between px-6 pb-4 border-b border-foreground/[0.06]">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-accent-foreground shadow-md shadow-accent/20">
+                    <Code2 className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Portfolio</p>
-                    <p className="text-lg font-black uppercase tracking-tight">Main Menu</p>
+                    <p className="text-base font-black uppercase tracking-wide">Akash Kuppattil</p>
+                    <p className="text-[10px] font-black uppercase tracking-[0.35em] text-accent">Full-Stack · AI · Software</p>
                   </div>
                 </div>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  onClick={() => setSideMenuOpen(false)}
-                  className="w-12 h-12 rounded-full border border-white/5 hover:bg-accent group active:scale-95 transition-all"
+                <button
+                  onClick={() => setMenuOpen(false)}
+                  className="w-9 h-9 rounded-xl glass border border-foreground/10 flex items-center justify-center"
                 >
-                  <X className="w-5 h-5 text-accent group-hover:text-background" />
-                </Button>
+                  <X className="w-4 h-4" />
+                </button>
               </div>
 
-              <div className="flex-grow space-y-1 overflow-y-auto px-2 custom-scrollbar">
-                {navLinks.map((link, i) => (
-                  <motion.div key={link.name} variants={linkVariants}>
-                    <a
-                      href={link.href}
-                      className="group flex items-center justify-between py-5 border-b border-white/[0.03] hover:border-accent/50 transition-all"
-                      onClick={() => setSideMenuOpen(false)}
+              {/* Nav Grid — App icon style */}
+              <div className="px-5 py-5 grid grid-cols-3 gap-3">
+                {NAV_LINKS.map((link, i) => {
+                  const isActive = activeSection === link.href.replace("#", "")
+                  return (
+                    <motion.button
+                      key={link.name}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: i * 0.05, type: "spring", stiffness: 300, damping: 22 }}
+                      onClick={() => go(link.href)}
+                      className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl transition-all active:scale-95 ${isActive
+                        ? "bg-accent/15 border border-accent/30 text-accent"
+                        : "bg-foreground/[0.04] border border-foreground/[0.06] text-foreground hover:bg-foreground/10"
+                        }`}
                     >
-                      <div className="flex items-center gap-6">
-                        <span className="text-[11px] font-black text-accent/30 group-hover:text-accent transition-colors">0{i + 1}</span>
-                        <span className="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-foreground group-hover:text-accent group-hover:translate-x-3 transition-all duration-400">
-                          {link.name}
-                        </span>
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${isActive ? "bg-accent text-accent-foreground" : "bg-foreground/10 text-foreground"
+                        }`}>
+                        <link.Icon className="w-5 h-5" />
                       </div>
-                      <link.icon className="w-5 h-5 text-accent/20 group-hover:text-accent transition-all opacity-0 group-hover:opacity-100" />
-                    </a>
-                  </motion.div>
-                ))}
+                      <span className="text-[10px] font-black uppercase tracking-widest">{link.name}</span>
+                    </motion.button>
+                  )
+                })}
               </div>
 
-              <div className="mt-auto p-6 rounded-[2rem] bg-accent/5 border border-accent/10 space-y-6">
-                <div className="space-y-2">
-                  <p className="text-[10px] font-black text-accent uppercase tracking-[0.4em]">Get in Touch</p>
-                  <a href="mailto:akashskuppattil@gmail.com" className="text-lg sm:text-xl font-black hover:text-accent transition-colors break-all underline decoration-accent/20 underline-offset-4 decoration-2">
-                    akashskuppattil@gmail.com
-                  </a>
-                </div>
-                <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                  <span>© 2026 AKASH K</span>
-                  <span className="text-accent italic">Calicut, IN</span>
-                </div>
+              {/* Quick actions row */}
+              <div className="px-5 pb-4 grid grid-cols-2 gap-3">
+                <motion.button
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  onClick={() => go("#contact")}
+                  className="flex items-center justify-center gap-2.5 h-13 py-3.5 rounded-2xl bg-accent text-accent-foreground text-[10px] font-black uppercase tracking-[0.25em] shadow-lg shadow-accent/20 active:scale-95 transition-all"
+                >
+                  <Sparkles className="w-4 h-4" /> Hire Me
+                </motion.button>
+                <motion.a
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  href="/Akash_K_Software_Developer_Resume.pdf"
+                  download
+                  className="flex items-center justify-center gap-2.5 h-13 py-3.5 rounded-2xl glass border border-foreground/15 text-[10px] font-black uppercase tracking-[0.25em] active:scale-95 transition-all"
+                >
+                  <Download className="w-4 h-4" /> Resume
+                </motion.a>
               </div>
+
+              {/* Social + Theme row */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.45 }}
+                className="px-5 pb-6"
+              >
+                <div className="rounded-2xl bg-foreground/[0.04] border border-foreground/[0.06] p-4 flex items-center justify-between">
+                  {/* Socials */}
+                  <div className="flex items-center gap-2">
+                    <a href="https://github.com/akashkuppattil-dev" target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-xl glass border border-foreground/10 flex items-center justify-center text-muted-foreground hover:text-foreground transition-all active:scale-90">
+                      <Github className="w-4 h-4" />
+                    </a>
+                    <a href="https://linkedin.com/in/akash-k-developer" target="_blank" rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-xl glass border border-foreground/10 flex items-center justify-center text-muted-foreground hover:text-foreground transition-all active:scale-90">
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                    <div className="flex items-center gap-1.5 ml-2">
+                      <MapPin className="w-3.5 h-3.5 text-accent" />
+                      <span className="text-[10px] font-black uppercase tracking-widest text-muted-foreground">Kerala</span>
+                    </div>
+                  </div>
+
+                  {/* Theme toggle */}
+                  <button
+                    onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                    className="w-10 h-10 rounded-xl glass border border-foreground/10 flex items-center justify-center text-muted-foreground active:scale-90 transition-all"
+                  >
+                    {mounted && (theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />)}
+                    {!mounted && <div className="w-4 h-4" />}
+                  </button>
+                </div>
+              </motion.div>
             </motion.div>
           </>
         )}

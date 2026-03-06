@@ -8,15 +8,15 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AKASH K — Software Developer | Full-Stack Architect",
+  title: "Akash K — Full-Stack Developer | AI Engineer | Software Engineer",
   description:
-    "Professional Software Developer and Full-Stack Architect specializing in Python (Django), Node.js (NestJS), and React. Engineering scalable, high-performance web systems and available for freelance/contract opportunities.",
-  keywords: "Software Developer, Full-Stack Developer, Web Architect, Python Django Expert, NestJS Developer, React Developer, Freelance Developer India, Backend Specialist",
+    "Akash Kuppattil — Full-Stack Developer, AI Engineer & Software Engineer from Kerala, India. Specializing in React, Next.js, NestJS, Django, LLMs, LangChain, and AI-powered production systems. Available for high-impact opportunities in 2026.",
+  keywords: "Full-Stack Developer, AI Engineer, Software Engineer, React Developer, Next.js, NestJS, Django, LangChain, LLM, Prompt Engineering, Kerala India, Akash Kuppattil, Freelance Developer",
   openGraph: {
-    title: "AKASH K — Software Developer | Full-Stack Architect",
-    description: "Engineering scalable web systems with Python, Django, React, and modern backend technologies. Available for high-impact roles and contracts.",
+    title: "Akash K — Full-Stack Developer | AI Engineer | Software Engineer",
+    description: "Building intelligent production systems at the intersection of AI engineering, full-stack development and software engineering. Available for 2026 opportunities.",
     type: "website",
-    url: "https://akashkuppattil.dev",
+    url: "https://akashkuppattil-portfolio.vercel.app",
   },
   icons: {
     icon: [

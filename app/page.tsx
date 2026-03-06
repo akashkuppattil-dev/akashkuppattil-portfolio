@@ -14,6 +14,8 @@ import Blog from "@/sections/blog"
 import Resume from "@/sections/resume"
 import Contact from "@/sections/contact"
 import Footer from "@/sections/footer"
+import WhatsAppWidget from "@/components/whatsapp-widget"
+import MarqueeBanner from "@/components/marquee-banner"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { useEffect, useState } from "react"
 
@@ -25,42 +27,28 @@ export default function Home() {
     restDelta: 0.001
   })
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-
   useEffect(() => {
-    // Force scroll to top on mount/refresh
     if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
+      window.history.scrollRestoration = 'manual'
     }
-    window.scrollTo(0, 0);
-
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY })
-    }
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
+    window.scrollTo(0, 0)
   }, [])
 
   return (
     <ThemeProvider>
-      {/* Global Scroll Progress */}
+      {/* Global Scroll Progress Bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-accent z-[100] origin-left"
+        className="fixed top-0 left-0 right-0 h-[3px] bg-accent z-[100] origin-left"
         style={{ scaleX }}
       />
 
-      {/* Custom Motion Cursor */}
-      <motion.div
-        className="fixed top-0 left-0 w-8 h-8 bg-accent/30 rounded-full blur-xl pointer-events-none z-[999] mix-blend-difference hidden md:block"
-        animate={{ x: mousePos.x - 16, y: mousePos.y - 16 }}
-        transition={{ type: "spring", stiffness: 250, damping: 25 }}
-      />
+
 
       <Navigation />
 
       <main className="relative overflow-hidden bg-background">
-        {/* Continuous Grain Texture */}
-        <div className="fixed inset-0 pointer-events-none noise z-50 opacity-[0.03]"></div>
+        {/* Grain Texture Overlay */}
+        <div className="fixed inset-0 pointer-events-none noise z-50 opacity-[0.025]"></div>
 
         <Hero />
         <About />
@@ -68,8 +56,8 @@ export default function Home() {
         <Projects />
         <Services />
 
-        {/* Subtle Section Divider */}
-        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent mx-auto"></div>
+        {/* Section Break */}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
 
         <Experience />
         <Education />
@@ -80,6 +68,7 @@ export default function Home() {
       </main>
 
       <Footer />
+      <WhatsAppWidget />
     </ThemeProvider>
   )
 }

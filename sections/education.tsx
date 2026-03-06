@@ -22,7 +22,7 @@ const education = [
 
 export default function Education() {
   return (
-    <section id="education" className="py-24 px-4 sm:px-6 bg-background relative overflow-hidden">
+    <section id="education" className="py-24 px-4 sm:px-6 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
         <div className="mb-20 flex flex-col items-center text-center space-y-4">
           <motion.div
@@ -39,7 +39,7 @@ export default function Education() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="flex flex-nowrap overflow-x-auto md:grid md:grid-cols-2 gap-5 md:gap-6 pb-8 md:pb-0 snap-x snap-mandatory scrollbar-hide px-4 sm:px-0 -mx-4 sm:mx-0">
           {education.map((edu, idx) => (
             <motion.div
               key={idx}
@@ -47,6 +47,7 @@ export default function Education() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
+              className="w-[85vw] max-w-[340px] md:w-auto md:max-w-none flex-shrink-0 snap-center md:snap-align-none"
             >
               <Card className="p-10 glass-card border border-white/5 group relative overflow-hidden h-full">
                 <div className="absolute top-0 right-0 p-10 opacity-[0.02] group-hover:opacity-[0.06] transition-all transform group-hover:rotate-12 group-hover:scale-110">
