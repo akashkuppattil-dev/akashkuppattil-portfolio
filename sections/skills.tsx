@@ -66,9 +66,9 @@ const aiTools = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-4 bg-transparent relative overflow-hidden">
+    <section id="skills" className="py-16 sm:py-24 px-4 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-20 flex flex-col md:flex-row justify-between items-end gap-10">
+        <div className="mb-12 sm:mb-20 flex flex-col md:flex-row justify-between items-end gap-10">
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-accent">
               <Sparkles className="w-4 h-4" />
@@ -84,42 +84,54 @@ export default function Skills() {
           </p>
         </div>
 
-        {/* Main Skills Grid */}
-        <div className="flex flex-nowrap overflow-x-auto sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16 pb-6 sm:pb-0 snap-x snap-mandatory scrollbar-hide px-4 sm:px-0 -mx-4 sm:mx-0">
-          {skillCategories.map((category, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.08 }}
-              className="w-[85vw] max-w-[340px] sm:w-auto sm:max-w-none flex-shrink-0 snap-center sm:snap-align-none h-full"
-            >
-              <Card className="p-6 glass-card h-full flex flex-col items-start gap-5 relative overflow-hidden group border border-border/50">
-                <div className={`absolute inset-0 bg-gradient-to-br ${category.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
+        {/* Infinite Auto-Scrolling Carousel */}
+        <div className="relative group overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0">
+          <motion.div
+            animate={{ x: [0, "-50%"] }}
+            transition={{
+              duration: 40,
+              repeat: Infinity,
+              ease: "linear",
+              repeatType: "loop"
+            }}
+            initial={{ x: 0 }}
+            className="flex gap-6 w-max py-10"
+          >
+            {[...skillCategories, ...skillCategories].map((category, idx) => (
+              <div
+                key={idx}
+                className="w-[300px] sm:w-[350px] flex-shrink-0 h-full"
+              >
+                <Card className="p-8 glass-card border-white/5 h-full flex flex-col items-start gap-6 relative overflow-hidden group hover:border-accent/30 transition-all duration-500 hover:-translate-y-2">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${category.color} to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
 
-                <div className="relative z-10 w-14 h-14 rounded-2xl bg-accent/5 flex items-center justify-center border border-accent/10 group-hover:bg-accent transition-all duration-500 shadow-xl">
-                  <category.icon className="w-7 h-7 text-accent group-hover:text-background transition-colors" />
-                </div>
+                  <div className="relative z-10 w-16 h-16 rounded-2xl bg-accent/5 flex items-center justify-center border border-accent/10 group-hover:bg-accent transition-all duration-500 shadow-2xl">
+                    <category.icon className="w-8 h-8 text-accent group-hover:text-background transition-colors" />
+                  </div>
 
-                <div className="relative z-10 space-y-2 flex-grow">
-                  <h3 className="text-lg font-black uppercase tracking-tight leading-none text-foreground group-hover:text-accent transition-colors">{category.title}</h3>
-                  <p className="text-xs text-muted-foreground font-medium leading-relaxed">{category.description}</p>
-                </div>
+                  <div className="relative z-10 space-y-3 flex-grow">
+                    <h3 className="text-xl font-black uppercase tracking-tight leading-none text-foreground group-hover:text-accent transition-colors">{category.title}</h3>
+                    <p className="text-sm text-muted-foreground font-medium leading-relaxed italic">"{category.description}"</p>
+                  </div>
 
-                <div className="relative z-10 flex flex-wrap gap-1.5 mt-auto pt-4">
-                  {category.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 text-[8px] font-black uppercase tracking-widest rounded-lg bg-foreground/5 border border-border text-muted-foreground hover:bg-accent/10 hover:text-accent hover:border-accent/40 transition-all"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </Card>
-            </motion.div>
-          ))}
+                  <div className="relative z-10 flex flex-wrap gap-2 mt-auto pt-6 border-t border-white/5 w-full">
+                    {category.skills.map((skill, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1.5 text-[9px] font-black uppercase tracking-widest rounded-xl bg-foreground/5 border border-border text-muted-foreground hover:bg-accent hover:text-white hover:border-accent/40 transition-all"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </Card>
+              </div>
+            ))}
+          </motion.div>
+
+          {/* Masking gradients */}
+          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none hidden sm:block" />
+          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none hidden sm:block" />
         </div>
 
         {/* AI Tools Section */}

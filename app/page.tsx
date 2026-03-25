@@ -10,12 +10,13 @@ import Experience from "@/sections/experience"
 import Projects from "@/sections/projects"
 import Education from "@/sections/education"
 import Certifications from "@/sections/certifications"
-import Blog from "@/sections/blog"
+
 import Resume from "@/sections/resume"
 import Contact from "@/sections/contact"
 import Footer from "@/sections/footer"
 import WhatsAppWidget from "@/components/whatsapp-widget"
 import MarqueeBanner from "@/components/marquee-banner"
+import Preloader from "@/components/preloader"
 import { motion, useScroll, useSpring } from "framer-motion"
 import { useEffect, useState } from "react"
 
@@ -45,6 +46,7 @@ export default function Home() {
 
 
       <Navigation />
+      <Preloader />
 
       <main className="relative overflow-hidden bg-background">
         {/* Grain Texture Overlay */}
@@ -62,7 +64,7 @@ export default function Home() {
         <Experience />
         <Education />
         <Certifications />
-        <Blog />
+
         <Resume />
         <Contact />
       </main>

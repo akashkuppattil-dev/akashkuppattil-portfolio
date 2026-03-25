@@ -150,14 +150,14 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="py-20 sm:py-28 px-4 sm:px-6 bg-transparent relative overflow-hidden">
+    <section id="contact" className="py-12 sm:py-20 px-4 sm:px-6 bg-transparent relative overflow-hidden">
       {/* Background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[70vw] h-[70vw] bg-accent/[0.04] rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto">
 
         {/* ── Header ── */}
-        <div className="text-center mb-14 space-y-4">
+        <div className="text-center mb-8 sm:mb-12 space-y-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}

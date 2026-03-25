@@ -59,9 +59,9 @@ function AnimatedNumber({ value }: { value: number }) {
 
 export default function About() {
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 bg-transparent relative overflow-hidden">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row gap-16 items-center mb-24">
+        <div className="flex flex-col lg:flex-row gap-12 sm:gap-16 items-center mb-16 sm:mb-24">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -79,11 +79,7 @@ export default function About() {
               </h2>
             </div>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed font-medium max-w-xl mx-auto lg:mx-0">
-              I'm a <span className="text-foreground font-black">Full-Stack Developer</span>,{" "}
-              <span className="text-accent font-black">AI Engineer</span>, and{" "}
-              <span className="text-foreground font-black">Software Engineer</span> from Kerala, India. I specialize in bridging{" "}
-              <span className="text-foreground font-black">advanced AI capabilities</span> with{" "}
-              <span className="text-accent italic">seamless production systems</span>.
+              I am <span className="text-foreground font-black">Akash Kuppattil</span>, a digital architect based in Kerala, India. I specialize in crafting <span className="text-accent font-black tracking-tight">high-intelligence ecosystems</span> that combine robust backend engineering with premium, user-centric interfaces. My mission is to bridge the gap between <span className="text-foreground font-black">autonomous AI capabilities</span> and <span className="text-accent italic">high-performance systems</span>.
             </p>
 
             {/* Role Badges */}
@@ -112,7 +108,6 @@ export default function About() {
               ))}
             </div>
           </motion.div>
-
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}

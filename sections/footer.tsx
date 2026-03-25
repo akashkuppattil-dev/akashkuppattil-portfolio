@@ -15,7 +15,7 @@ export default function Footer() {
   ]
 
   return (
-    <footer className="bg-transparent border-t border-white/5 py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+    <footer className="bg-transparent border-t border-white/5 py-10 sm:py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[50vw] h-[1px] bg-gradient-to-r from-transparent via-accent/30 to-transparent"></div>
 
       <div className="max-w-7xl mx-auto">

@@ -82,10 +82,12 @@ export default function Navigation() {
       >
         <div className="pointer-events-auto w-full max-w-[95vw] sm:max-w-max flex items-center justify-between gap-3 sm:gap-6 px-5 sm:px-6 py-2.5 sm:py-2.5 rounded-full bg-foreground/[0.03] backdrop-blur-3xl border border-border shadow-2xl">
 
-          {/* Logo */}
-          <button onClick={() => go("#hero")} className="flex items-center gap-2 group flex-shrink-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-[11px] font-bold uppercase tracking-widest text-foreground">Akash Kuppattil</span>
+          {/* Logo / Name */}
+          <button onClick={() => go("#hero")} className="flex items-center gap-3 group flex-shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+            <span className="text-[11px] font-black uppercase tracking-[0.3em] text-foreground">
+              Akash <span className="text-accent italic">Kuppattil</span>
+            </span>
           </button>
 
           {/* Desktop Nav */}
@@ -93,6 +95,7 @@ export default function Navigation() {
             {[
               { name: "About", href: "#about" },
               { name: "Skills", href: "#skills" },
+              { name: "Services", href: "#services" },
               { name: "Projects", href: "#projects" },
               { name: "Experience", href: "#experience" },
               { name: "Contact", href: "#contact" },
@@ -127,10 +130,11 @@ export default function Navigation() {
             {/* Hamburger — mobile only */}
             <button
               onClick={() => setMenuOpen(true)}
-              className="md:hidden flex flex-col gap-1 items-center justify-center w-5 text-foreground"
+              className="md:hidden flex flex-col gap-1 items-center justify-center w-5 h-5 text-foreground group"
             >
-              <span className="w-full h-[1px] bg-foreground" />
-              <span className="w-full h-[1px] bg-foreground" />
+              <span className="w-full h-[1px] bg-foreground group-hover:bg-accent transition-colors" />
+              <span className="w-3/4 h-[1px] bg-foreground group-hover:bg-accent transition-colors ml-auto" />
+              <span className="w-full h-[1px] bg-foreground group-hover:bg-accent transition-colors" />
             </button>
           </div>
         </div>
@@ -139,7 +143,7 @@ export default function Navigation() {
       {/* ════════════════════════════
            MOBILE APP-STYLE DRAWER
          ════════════════════════════ */}
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {menuOpen && (
           <>
             {/* Backdrop */}
@@ -149,64 +153,69 @@ export default function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
-              className="fixed inset-0 z-[95] bg-black/60 backdrop-blur-sm lg:hidden"
+              className="fixed inset-0 z-[95] bg-background/40 backdrop-blur-md lg:hidden"
             />
 
             {/* Slide-up drawer */}
             <motion.div
               key="drawer"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ type: "spring", stiffness: 350, damping: 35 }}
-              className="fixed bottom-0 left-0 right-0 z-[96] lg:hidden rounded-t-[2rem] bg-transparent border-t border-foreground/10 shadow-2xl shadow-black/40 overflow-hidden"
-              style={{ maxHeight: "92vh" }}
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="fixed bottom-0 left-0 right-0 z-[96] lg:hidden rounded-t-[3rem] bg-background/80 glass-card border-t border-white/10 shadow-[0_-25px_50px_-12px_rgba(0,0,0,0.5)] overflow-hidden"
+              style={{ maxHeight: "96vh" }}
             >
+              <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
+
               {/* Drag handle */}
-              <div className="flex justify-center pt-4 pb-2">
-                <div className="w-10 h-1 rounded-full bg-foreground/20" />
+              <div className="flex justify-center pt-5 pb-2">
+                <div className="w-12 h-1.5 rounded-full bg-white/10" />
               </div>
 
               {/* Drawer Header */}
-              <div className="flex items-center justify-between px-6 pb-4 border-b border-foreground/[0.06]">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center text-accent-foreground shadow-md shadow-accent/20">
-                    <Code2 className="w-5 h-5" />
+              <div className="flex items-center justify-between px-8 py-6 border-b border-white/5">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center text-accent-foreground shadow-2xl shadow-accent/40 group overflow-hidden relative">
+                    <img src="/logo.png" alt="AK" className="w-8 h-8 object-contain" />
                   </div>
                   <div>
-                    <p className="text-base font-black uppercase tracking-wide">Akash Kuppattil</p>
-                    <p className="text-[10px] font-black uppercase tracking-[0.35em] text-accent">Full-Stack · AI · Software</p>
+                    <p className="text-xl font-black uppercase tracking-tight">Akash <span className="text-accent italic">Kuppattil</span></p>
+                    <div className="flex items-center gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+                      <p className="text-[10px] font-black uppercase tracking-[0.4em] text-accent/80">Premium Architect</p>
+                    </div>
                   </div>
                 </div>
                 <button
                   onClick={() => setMenuOpen(false)}
-                  className="w-9 h-9 rounded-xl glass border border-foreground/10 flex items-center justify-center"
+                  className="w-11 h-11 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-all active:scale-90"
                 >
-                  <X className="w-4 h-4" />
+                  <X className="w-5 h-5 text-foreground" />
                 </button>
               </div>
 
-              {/* Nav Grid — App icon style */}
-              <div className="px-5 py-5 grid grid-cols-3 gap-3">
+              {/* Nav Grid — Super Premium App icon style */}
+              <div className="px-6 py-8 grid grid-cols-2 xs:grid-cols-3 gap-4">
                 {NAV_LINKS.map((link, i) => {
                   const isActive = activeSection === link.href.replace("#", "")
                   return (
                     <motion.button
                       key={link.name}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.05, type: "spring", stiffness: 300, damping: 22 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.04, type: "spring", stiffness: 200, damping: 20 }}
                       onClick={() => go(link.href)}
-                      className={`flex flex-col items-center gap-2.5 p-4 rounded-2xl transition-all active:scale-95 ${isActive
-                        ? "bg-accent/15 border border-accent/30 text-accent"
-                        : "bg-foreground/[0.04] border border-foreground/[0.06] text-foreground hover:bg-foreground/10"
+                      className={`flex flex-col items-center gap-3 p-5 rounded-[2rem] transition-all active:scale-90 relative overflow-hidden group ${isActive
+                        ? "bg-accent/10 border border-accent/20"
+                        : "bg-white/[0.03] border border-white/5 hover:bg-white/[0.06]"
                         }`}
                     >
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center ${isActive ? "bg-accent text-accent-foreground" : "bg-foreground/10 text-foreground"
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${isActive ? "bg-accent text-accent-foreground shadow-lg shadow-accent/20" : "bg-white/5 text-muted-foreground group-hover:bg-white/10 group-hover:text-foreground"
                         }`}>
-                        <link.Icon className="w-5 h-5" />
+                        <link.Icon className="w-6 h-6" />
                       </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest">{link.name}</span>
+                      <span className={`text-[11px] font-black uppercase tracking-widest ${isActive ? "text-accent" : "text-muted-foreground"}`}>{link.name}</span>
                     </motion.button>
                   )
                 })}
