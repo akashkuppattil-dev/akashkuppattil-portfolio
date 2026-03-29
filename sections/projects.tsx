@@ -1,222 +1,204 @@
 "use client"
 
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { ExternalLink, Github, Smartphone, Sparkles, Monitor, Server, Shield } from "lucide-react"
 import { motion } from "framer-motion"
-import { DeviceMockup } from "@/components/ui/device-mockup"
+import { ExternalLink, Github, ArrowUpRight } from "lucide-react"
 
-const projects = [
+const LIVE_PROJECTS = [
+  {
+    title: "Lumora Triad",
+    category: "Product Studio & Agency",
+    challenge: "Establishing a premium digital studio identity for high-performance software and brand solutions.",
+    impact: "A minimalist editorial platform showcasing studio capabilities and elite project delivery.",
+    stack: ["Studio Design", "Next.js", "Editorial"],
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop",
+    link: "https://www.lumoratriad.in/"
+  },
   {
     title: "Hexamech Tools",
     category: "Industrial & Corporate",
-    problem: "The objective was to establish trust, credibility, and industry authority for an industrial tools supplier in India.",
-    solution: "A professional corporate website clearly presenting product categories and company strength with a clean design.",
-    tech: ["Corporate Layout", "SEO Optimized"],
-    github: "https://github.com/akashkuppattil-dev",
-    link: "https://www.hexamechlinichtools.com/",
-    icon: Monitor,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2070&auto=format&fit=crop"
+    challenge: "The objective was to establish trust, credibility, and industry authority for an industrial tools supplier in India.",
+    impact: "A professional corporate website clearly presenting product categories and company strength with a clean design.",
+    stack: ["Corporate Layout", "SEO Optimized", "Responsive"],
+    image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop",
+    link: "https://akashkuppattil.dev/project"
   },
   {
     title: "JOOHAA LUXE",
     category: "E-Commerce & Fashion",
-    problem: "Creating a premium digital storefront for luxury nightwear that balances elegance with high-performance e-commerce.",
-    solution: "Designed a high-conversion shopping experience with curated product showcases and mobile-first navigation.",
-    tech: ["Next.js", "Tailwind", "E-commerce"],
-    github: "https://github.com/akashkuppattil-dev",
-    link: "https://jhoha-web.vercel.app/",
-    icon: Smartphone,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=2070&auto=format&fit=crop"
+    challenge: "Creating a premium digital storefront for luxury nightwear that balances elegance with high-performance e-commerce.",
+    impact: "Designed a high-conversion shopping experience with curated product showcases and mobile-first navigation.",
+    stack: ["Next.js", "TailwindCSS", "E-commerce"],
+    image: "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1920&auto=format&fit=crop",
+    link: "https://akashkuppattil.dev/project",
+    imagePos: "object-top"
   },
   {
     title: "Divine Driving School",
     category: "Education & Services",
-    problem: "Modernizing the digital presence of a trusted driving school to attract a younger demographic in Kerala.",
-    solution: "A service-oriented platform with curriculum highlights, expert instructor profiles, and streamlined booking flows.",
-    tech: ["App Router", "Framer Motion", "SEO"],
-    github: "https://github.com/akashkuppattil-dev",
-    link: "https://v0-driving-school-website-rouge.vercel.app/",
-    icon: Smartphone, // Using Smartphone as a fallback since Car might not be imported
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?q=80&w=2070&auto=format&fit=crop"
+    challenge: "Modernizing the digital presence of a trusted driving school to attract a younger demographic in Kerala.",
+    impact: "A service-oriented platform with curriculum highlights, expert instructor profiles, and streamlined booking flows.",
+    stack: ["App Router", "Framer Motion", "SEO"],
+    image: "https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?q=80&w=2038&auto=format&fit=crop",
+    link: "https://akashkuppattil.dev/project"
   },
   {
     title: "BASIC Trading Company",
     category: "Wholesale & Distribution",
-    problem: "Bridging the gap between bulk manufacturing and event management contractors in the catering industry.",
-    solution: "Comprehensive product catalog and inquiry system for event materials and wholesale distribution.",
-    tech: ["Product Catalog", "Responsive", "UI/UX"],
-    github: "https://github.com/akashkuppattil-dev",
-    link: "https://v0-basic-trading-company-website.vercel.app/",
-    icon: Monitor,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop"
-  },
+    challenge: "Bridging the gap between bulk manufacturing and event management contractors in the catering industry.",
+    impact: "Comprehensive product catalog and inquiry system for event materials and wholesale distribution.",
+    stack: ["Product Catalog", "Responsive", "UI/UX"],
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop",
+    link: "https://akashkuppattil.dev/project"
+  }
+]
+
+const LAB_PROJECTS = [
   {
     title: "FaceConsent AI",
     category: "AI & Privacy Bot",
-    problem: "Lack of specific consent management in automated photo-sharing environments and social platforms.",
-    solution: "AI-driven privacy platform using facial recognition to automate and verify photo-sharing permissions.",
-    tech: ["Python", "Flask", "OpenCV", "AI"],
-    github: "https://github.com/akashkuppattil-dev/faceconsent",
-    link: "https://github.com/akashkuppattil-dev/faceconsent",
-    icon: Shield,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop"
+    challenge: "Lack of specific consent management in automated photo-sharing environments.",
+    stack: ["Python", "Flask", "OpenCV", "AI"],
+    github: "https://github.com/akashkuppattil-dev/faceconsent"
   },
   {
     title: "Free Bird Impact",
     category: "Social Impact NGO",
-    problem: "Inefficient tracking of beneficiary progress across multiple social impact programs.",
-    solution: "Built a comprehensive dashboard allowing NGOs to monitor progress, manage beneficiaries, and generate reports.",
-    tech: ["Django", "Python", "Dashboard"],
-    github: "https://github.com/akashkuppattil-dev/Free_Bird",
-    link: "https://github.com/akashkuppattil-dev/Free_Bird",
-    icon: Monitor,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop"
+    challenge: "Inefficient tracking of beneficiary progress across multiple programs.",
+    stack: ["Django", "Python", "Dashboard"],
+    github: "https://github.com/akashkuppattil-dev/Free_Bird"
   },
   {
     title: "Logistics Tracker",
     category: "Backend & Analytics",
-    problem: "Lack of real-time visibility into vehicle movement and manual warehouse operations causing delays.",
-    solution: "Engineered a tracking system with automated workflows and data analytics for predictive management.",
-    tech: ["HTML", "JavaScript", "Tracking"],
-    github: "https://github.com/akashkuppattil-dev/Logistics-Tracking-Warehouse-Management-System",
-    link: "https://github.com/akashkuppattil-dev/Logistics-Tracking-Warehouse-Management-System",
-    icon: Server,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=2070&auto=format&fit=crop"
+    challenge: "Lack of real-time visibility into vehicle movement and warehouse operations.",
+    stack: ["HTML", "JavaScript", "Tracking"],
+    github: "https://github.com/akashkuppattil-dev/Logistics-Tracking-Warehouse-Management-System"
   },
   {
     title: "Review Intelligence API",
     category: "Backend Engineering",
-    problem: "Fragmented sentiment analysis and review management for e-commerce platforms.",
-    solution: "Robust Django REST API for processing and managing large-scale product reviews with high-performance endpoints.",
-    tech: ["Django REST", "PostgreSQL", "API"],
-    github: "https://github.com/akashkuppattil-dev/product-review-api",
-    link: "https://github.com/akashkuppattil-dev/product-review-api",
-    icon: Server,
-    deviceType: "browser" as const,
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+    challenge: "Fragmented sentiment analysis and review management for e-commerce.",
+    stack: ["Django REST", "PostgreSQL", "API"],
+    github: "https://github.com/akashkuppattil-dev"
   }
 ]
 
 export default function Projects() {
   return (
-    <section id="projects" className="py-16 sm:py-24 px-4 sm:px-6 bg-transparent relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-16 sm:mb-24 flex flex-col items-center text-center space-y-6">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 text-accent px-4 py-1.5 glass border border-accent/20 rounded-full"
-          >
-            <Sparkles className="w-4 h-4" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em]">Featured Work</span>
-          </motion.div>
-          <h2 className="text-4xl xs:text-5xl md:text-8xl font-black tracking-tighter uppercase leading-[0.8] drop-shadow-sm">
-            Case <span className="text-accent italic">Studies</span>
+    <section id="projects" className="section-padding bg-background border-t border-border overflow-hidden">
+      <div className="container-wide">
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="mb-20"
+        >
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground mb-4 block">Selected Work</span>
+          <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-semibold tracking-tight leading-[1.1] mb-8">
+            Case <span className="editorial-italic">Studies</span> & <br className="hidden md:block"/> architectural solutions.
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl font-medium">
-            Deep-diving into <span className="text-foreground font-bold">architecture-first</span> solutions, where engineering precision meets elite aesthetics.
+          <p className="text-muted-foreground text-lg max-w-2xl leading-relaxed">
+            Deep-diving into architecture-first solutions, where engineering precision meets elite aesthetics.
           </p>
+        </motion.div>
+
+        {/* Live Case Studies */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 mb-32">
+          {LIVE_PROJECTS.map((project, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="flex flex-col group"
+            >
+              <div className="aspect-[16/10] w-full bg-border/20 rounded-2xl overflow-hidden mb-8 relative border border-border group-hover:border-foreground/20 transition-all duration-700">
+                 <img 
+                   src={project.image} 
+                   alt={project.title} 
+                   className={`w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105 ${project.imagePos || 'object-center'}`}
+                 />
+                 <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="bg-background/80 backdrop-blur-md p-3 rounded-full border border-border">
+                       <ArrowUpRight size={18} />
+                    </div>
+                 </div>
+              </div>
+              
+              <div className="flex flex-col gap-4">
+                <div className="flex items-center justify-between">
+                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{project.category}</span>
+                   <div className="flex gap-2">
+                     {project.stack.map((s) => (
+                       <span key={s} className="text-[8px] font-bold uppercase border border-border px-2 py-0.5 rounded-full">{s}</span>
+                     ))}
+                   </div>
+                </div>
+                
+                <h3 className="text-3xl font-semibold tracking-tight uppercase group-hover:italic transition-all duration-500">
+                  {project.title}
+                </h3>
+                
+                <div className="space-y-4">
+                   <p className="text-sm font-medium leading-relaxed italic text-foreground truncate">"{project.challenge}"</p>
+                   <p className="text-muted-foreground leading-relaxed text-balance text-sm">
+                     {project.impact}
+                   </p>
+                </div>
+
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  className="mt-4 flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] hover:opacity-50 transition-all underline underline-offset-4 text-foreground"
+                >
+                  Launch Project <ExternalLink size={12} />
+                </a>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
-        <div className="relative group/carousel">
-          {/* Scroll Progress / Indicator - Visible only on mobile */}
-          <div className="flex sm:hidden items-center justify-center gap-2 mb-8 animate-pulse">
-            <div className="h-[2px] w-8 bg-accent" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent">Swipe to explore</span>
-            <div className="h-[2px] w-8 bg-accent" />
-          </div>
+        {/* Lab / Git Projects */}
+        <div className="border-t border-border pt-24">
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="mb-16"
+           >
+              <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground mb-4 block">Engineering Lab</span>
+              <h3 className="text-3xl font-semibold tracking-tight uppercase">Proprietary <span className="editorial-italic">&</span> Git Assets</h3>
+           </motion.div>
 
-          <div className="flex flex-nowrap overflow-x-auto sm:flex-col snap-x snap-mandatory sm:snap-none scrollbar-hide px-4 sm:px-0 -mx-4 sm:mx-0 gap-6 sm:gap-0 sm:space-y-32 md:space-y-48 pb-12 sm:pb-0 items-start sm:items-stretch group">
-            {projects.map((project, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className={`w-[78vw] sm:w-auto flex-shrink-0 snap-center sm:snap-align-none flex flex-col ${idx % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"} gap-8 lg:gap-24 items-center`}
-              >
-                <div className="w-full lg:w-1/2 group relative">
-                  {/* Backdrop Glow */}
-                  <div className="absolute inset-0 bg-accent/20 blur-[80px] rounded-full scale-75 opacity-0 group-hover:opacity-100 transition-opacity duration-1000 -z-10" />
-
-                  <DeviceMockup type={project.deviceType} className="shadow-[0_40px_80px_rgba(0,0,0,0.5)] border-white/[0.05] glass transition-all duration-700 group-hover:scale-[1.03] group-hover:rotate-1">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700"
-                      loading="lazy"
-                    />
-                  </DeviceMockup>
-                </div>
-
-                <div className="w-full lg:w-1/2 space-y-8 text-center lg:text-left">
-                  <div className="space-y-4 sm:space-y-6">
-                    <Badge variant="outline" className="text-accent border-accent/20 tracking-widest uppercase text-[10px] px-5 py-2 font-black glass-card">
-                      {project.category}
-                    </Badge>
-                    <h3 className="text-3xl xs:text-4xl md:text-6xl font-black tracking-tighter uppercase leading-none group">
-                      <span className="bg-left-bottom bg-gradient-to-r from-accent to-accent bg-[length:0%_3px] bg-no-repeat group-hover:bg-[length:100%_3px] transition-all duration-500 pb-2">
-                        {project.title}
-                      </span>
-                    </h3>
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {LAB_PROJECTS.map((lab, i) => (
+                <motion.div
+                  key={lab.title}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-8 border border-border rounded-xl hover:bg-border/10 transition-colors flex flex-col justify-between group"
+                >
+                  <div className="space-y-4">
+                     <div className="flex justify-between items-start">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">{lab.category}</span>
+                        <a href={lab.github} target="_blank" className="text-muted-foreground hover:text-foreground transition-colors">
+                           <Github size={20} />
+                        </a>
+                     </div>
+                     <h4 className="text-xl font-semibold tracking-tight uppercase group-hover:italic transition-all">{lab.title}</h4>
+                     <p className="text-sm text-muted-foreground leading-relaxed">{lab.challenge}</p>
                   </div>
-
-                  <div className="space-y-6 sm:space-y-8 max-w-xl mx-auto lg:mx-0">
-                    <div className="space-y-3 border-l-2 border-white/5 pl-6 group/item hover:border-accent transition-colors text-left sm:text-left">
-                      <p className="text-[10px] font-black text-accent uppercase tracking-[0.3em]">The Challenge</p>
-                      <p className="text-base sm:text-xl text-muted-foreground font-medium italic leading-relaxed">
-                        "{project.problem}"
-                      </p>
-                    </div>
-                    <div className="space-y-3 border-l-2 border-white/5 pl-6 group/item hover:border-accent transition-colors text-left sm:text-left">
-                      <p className="text-[10px] font-black text-primary uppercase tracking-[0.3em]">The Impact</p>
-                      <p className="text-base sm:text-xl text-foreground font-black uppercase tracking-tight">
-                        {project.solution}
-                      </p>
-                    </div>
+                  <div className="flex gap-2 mt-8">
+                     {lab.stack.map(s => (
+                       <span key={s} className="text-[8px] font-bold uppercase tracking-widest text-muted-foreground bg-border/40 px-2 py-1 rounded">{s}</span>
+                     ))}
                   </div>
-
-                  <div className="flex flex-wrap justify-center lg:justify-start gap-2.5">
-                    {project.tech.map((t, i) => (
-                      <span key={i} className="px-4 py-2 text-[9px] font-black uppercase tracking-widest bg-white/5 border border-white/10 rounded-xl text-muted-foreground hover:bg-accent hover:text-white hover:border-accent transition-all">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center gap-4 justify-center lg:justify-start">
-                    <Button
-                      size="lg"
-                      className="h-14 sm:h-16 px-10 rounded-2xl bg-accent hover:bg-accent/90 text-accent-foreground font-black text-xs uppercase tracking-widest shadow-2xl shadow-accent/20 group w-full sm:w-auto overflow-hidden relative"
-                      onClick={() => window.open(project.link, "_blank")}
-                    >
-                      <span className="relative z-10 flex items-center gap-3">
-                        Launch <ExternalLink className="w-4 h-4" />
-                      </span>
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="w-14 sm:w-16 h-14 sm:h-16 rounded-2xl border-white/5 glass-card hover:bg-accent/10 flex-shrink-0 group"
-                      onClick={() => window.open(project.github, "_blank")}
-                    >
-                      <Github className="w-6 h-6 sm:w-7 h-7 group-hover:rotate-12 transition-transform" />
-                    </Button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+           </div>
         </div>
       </div>
     </section>

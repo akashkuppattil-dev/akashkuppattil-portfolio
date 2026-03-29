@@ -63,7 +63,7 @@ export default function Preloader() {
                                 transition={{ delay: 0.5 }}
                                 className="text-[10px] font-black uppercase tracking-[0.6em] text-accent"
                             >
-                                Check it out
+                                アカシュ
                             </motion.p>
                             <div className="h-[1px] w-32 bg-white/10 relative overflow-hidden mx-auto">
                                 <motion.div

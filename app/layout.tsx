@@ -1,22 +1,49 @@
 import type React from "react"
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import type { Metadata, Viewport } from "next"
+import { Instrument_Sans, Instrument_Serif } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const instrumentSans = Instrument_Sans({ 
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: 'swap',
+  preload: true,
+})
+
+const instrumentSerif = Instrument_Serif({ 
+  subsets: ["latin"],
+  variable: "--font-serif",
+  weight: "400",
+  display: 'swap',
+  preload: true,
+})
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+}
 
 export const metadata: Metadata = {
-  title: "Akash K — Full-Stack Developer",
+  title: "Akash Kuppattil — Technical Architect & Full-Stack Developer",
   description:
-    "Akash Kuppattil — Full-Stack Developer, AI Engineer & Software Engineer from Kerala, India. Specializing in React, Next.js, NestJS, Django, LLMs, LangChain, and AI-powered production systems. Available for high-impact opportunities in 2026.",
-  keywords: "Full-Stack Developer, AI Engineer, Software Engineer, React Developer, Next.js, NestJS, Django, LangChain, LLM, Prompt Engineering, Kerala India, Akash Kuppattil, Freelance Developer",
+    "Engineering elite digital products and high-performance backend systems. Specialized in AI Integration, Scalable Architecture, and Studio-level delivery. Co-founder at Lumora Triad.",
+  keywords: "Full-Stack Developer, AI Engineering, Technical Architect, Django, Next.js, Lumora Triad, Akash Kuppattil, Software Engineering",
+  metadataBase: new URL("https://akashkuppattil.dev"),
   openGraph: {
-    title: "Akash K — Full-Stack Developer | AI Engineer | Software Engineer",
-    description: "Building intelligent production systems at the intersection of AI engineering, full-stack development and software engineering. Available for 2026 opportunities.",
+    title: "Akash Kuppattil — Technical Architect",
+    description: "Engineering digital dominance through high-performance software systems and elite architectural design.",
     type: "website",
-    url: "https://akashkuppattil-portfolio.vercel.app",
+    images: ["/logo.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Akash Kuppattil — Technical Architect",
+    description: "Engineering digital dominance through elite software systems.",
+    images: ["/logo.png"],
   },
   icons: {
     icon: "/logo.png",
@@ -30,9 +57,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
-        {children}
+    <html lang="en" suppressHydrationWarning className={`${instrumentSans.variable} ${instrumentSerif.variable}`}>
+       <body className={`${instrumentSans.className} font-sans antialiased bg-background text-foreground selection:bg-foreground selection:text-background h-full`}>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+          {children}
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>

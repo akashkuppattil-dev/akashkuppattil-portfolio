@@ -11,6 +11,7 @@ import Projects from "@/sections/projects"
 import Education from "@/sections/education"
 import Certifications from "@/sections/certifications"
 
+import Methodology from "@/sections/methodology"
 import Resume from "@/sections/resume"
 import Contact from "@/sections/contact"
 import Footer from "@/sections/footer"
@@ -57,6 +58,7 @@ export default function Home() {
         <Skills />
         <Projects />
         <Services />
+        <Methodology />
 
         {/* Section Break */}
         <div className="h-px w-full bg-gradient-to-r from-transparent via-accent/20 to-transparent" />

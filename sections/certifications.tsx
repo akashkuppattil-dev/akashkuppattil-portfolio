@@ -1,103 +1,72 @@
 "use client"
 
-import { Card } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Award, ShieldCheck, Sparkles, ExternalLink } from "lucide-react"
 import { motion } from "framer-motion"
 
-const certifications = [
-  { title: "Python & Django Development", provider: "Udemy", icon: "🐍", year: "2024", image: "https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=2000&auto=format&fit=crop" },
-  { title: "JavaScript & React Fundamentals", provider: "Coursera", icon: "⚛️", year: "2023", image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2070&auto=format&fit=crop" },
-  { title: "SQL & Database Management", provider: "Simplilearn", icon: "🗄️", year: "2023", image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=2036&auto=format&fit=crop" },
-  { title: "Web Development Bootcamp", provider: "FreeCodeCamp", icon: "💻", year: "2022", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop" },
-  { title: "Google Cloud Essentials", provider: "Google Cloud", icon: "☁️", year: "2024", image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" },
-  { title: "React Advanced Patterns", provider: "Meta", icon: "📱", year: "2024", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" },
-  { title: "AI & Prompt Engineering", provider: "DeepLearning.AI", icon: "🤖", year: "2025", image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1965&auto=format&fit=crop" },
-  { title: "LangChain for LLM Apps", provider: "Udemy", icon: "🔗", year: "2025", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop" },
-  { title: "Full-Stack NestJS & TypeScript", provider: "Udemy", icon: "🏗️", year: "2024", image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2000&auto=format&fit=crop" },
+const CERTS = [
+  {
+    id: "01",
+    title: "AI & Prompt Engineering",
+    provider: "DeepLearning.AI",
+    year: "2025"
+  },
+  {
+    id: "02",
+    title: "Python & Django Development",
+    provider: "Udemy",
+    year: "2024"
+  },
+  {
+    id: "03",
+    title: "LangChain for LLM Apps",
+    provider: "Udemy",
+    year: "2025"
+  },
+  {
+    id: "04",
+    title: "Full-Stack NestJS & TypeScript",
+    provider: "Udemy",
+    year: "2024"
+  }
 ]
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-16 sm:py-24 px-4 sm:px-6 bg-transparent relative overflow-hidden">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-12 sm:mb-20 flex flex-col items-center text-center space-y-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-2 text-accent px-4 py-1.5 glass border border-accent/20 rounded-full"
-          >
-            <ShieldCheck className="w-4 h-4" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] font-sans">Validation & Mastery</span>
-          </motion.div>
-          <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase leading-[0.8]">
-            Official <span className="text-accent italic">Mastery</span>
+    <section id="certifications" className="section-padding bg-background border-t border-border">
+      <div className="container-wide">
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           className="mb-20"
+        >
+          <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-muted-foreground mb-4 block">Validation</span>
+          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-semibold tracking-tight leading-[1.1]">
+            Professional <span className="editorial-italic">mastery</span> & <br className="hidden md:block"/> certifications.
           </h2>
-          <p className="text-muted-foreground font-medium max-w-lg">
-            Continuously learning and validating expertise across AI, full-stack development, and cloud infrastructure.
-          </p>
-        </div>
+        </motion.div>
 
-        {/* Infinite Auto-Scrolling Carousel */}
-        <div className="relative group overflow-hidden -mx-4 px-4 sm:mx-0 sm:px-0">
-          <motion.div
-            animate={{ x: [0, "-50%"] }}
-            transition={{
-              duration: 50,
-              repeat: Infinity,
-              ease: "linear",
-              repeatType: "loop"
-            }}
-            initial={{ x: 0 }}
-            className="flex gap-6 w-max py-10"
-          >
-            {[...certifications, ...certifications].map((cert, idx) => (
-              <div
-                key={idx}
-                className="w-[300px] sm:w-[350px] flex-shrink-0 h-full"
-              >
-                <Card className="p-0 glass-card border border-white/5 group h-full flex flex-col relative overflow-hidden hover:border-accent/20 transition-all duration-700 hover:-translate-y-3">
-                  {/* Mockup Image Header */}
-                  <div className="w-full h-40 relative overflow-hidden border-b border-border/50">
-                    <div className="absolute inset-0 bg-accent/10 mix-blend-overlay z-10 transition-opacity"></div>
-                    <img src={cert.image} alt={cert.title} loading="lazy" className="w-full h-full object-cover grayscale-[40%] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
-                  </div>
-
-                  <div className="p-6 flex flex-col flex-grow relative z-10">
-                    <div className="absolute top-0 right-0 p-8 opacity-[0.01] group-hover:opacity-[0.05] transition-all transform group-hover:-rotate-12 pointer-events-none">
-                      <Award className="w-32 h-32" />
-                    </div>
-
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="text-3xl w-14 h-14 rounded-2xl bg-foreground/5 border border-border flex items-center justify-center shadow-2xl group-hover:scale-110 group-hover:bg-accent group-hover:text-background transition-all duration-500">
-                        <span className="text-xl">{cert.icon}</span>
-                      </div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-accent bg-accent/5 px-3 py-1.5 rounded-full border border-accent/10">{cert.year}</span>
-                    </div>
-
-                    <div className="flex-grow space-y-2">
-                      <h3 className="text-lg font-black tracking-tighter uppercase leading-tight text-foreground group-hover:text-accent transition-colors">
-                        {cert.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground font-bold italic opacity-80 group-hover:opacity-100 transition-opacity">"{cert.provider}"</p>
-                    </div>
-
-                    <div className="mt-6 pt-5 border-t border-border/50">
-                      <div className="flex items-center gap-3 text-accent/60 group-hover:text-accent transition-all">
-                        <ShieldCheck className="w-4 h-4" />
-                        <span className="text-[9px] font-black uppercase tracking-widest">Verified Mastery</span>
-                      </div>
-                    </div>
-                  </div>
-                </Card>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {CERTS.map((cert, idx) => (
+            <motion.div 
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="p-8 border border-border rounded-xl hover:bg-border/5 transition-colors group"
+            >
+              <div className="flex justify-between items-start mb-6">
+                 <span className="text-xs font-medium text-muted-foreground">{cert.id}</span>
+                 <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{cert.year}</span>
               </div>
-            ))}
-          </motion.div>
-
-          {/* Masking gradients */}
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-20 pointer-events-none hidden sm:block" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-background to-transparent z-20 pointer-events-none hidden sm:block" />
+              <h3 className="text-lg font-semibold tracking-tight mb-2 group-hover:text-foreground transition-colors">
+                {cert.title}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                {cert.provider}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
