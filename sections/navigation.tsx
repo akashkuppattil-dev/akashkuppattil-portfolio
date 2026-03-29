@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence, useScroll } from "framer-motion"
 import { X, Menu, Moon, Sun, ArrowRight, Github, Linkedin, Instagram } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -12,7 +12,15 @@ export default function Navigation() {
   const { theme, setTheme } = useTheme()
   const { scrollY } = useScroll()
 
-  useEffect(() => setMounted(true), [])
+  useEffect(() => {
+    setMounted(true)
+    // Prevent body scroll when menu is open
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }, [menuOpen])
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
@@ -25,45 +33,35 @@ export default function Navigation() {
     })
   }, [scrollY])
 
-  const scrollTo = (href: string) => {
+  const scrollTo = useCallback((href: string) => {
     const id = href.replace("#", "")
     const el = document.getElementById(id)
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" })
       setMenuOpen(false)
+      // Small timeout to allow menu transition to finish before scrolling
+      setTimeout(() => {
+         el.scrollIntoView({ behavior: "smooth" })
+      }, 300)
     }
-  }
+  }, [])
 
   const menuVariants = {
     closed: {
-      y: "-100%",
+      opacity: 0,
+      y: -20,
       transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
-        when: "afterChildren"
+        duration: 0.3,
+        ease: "easeInOut"
       }
     },
     open: {
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: [0.16, 1, 0.3, 1],
-        when: "beforeChildren"
-      }
-    }
-  }
-
-  const linkVariants = {
-    closed: { opacity: 0, y: 20 },
-    open: (i: number) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.4 + i * 0.1,
-        duration: 0.8,
+        duration: 0.4,
         ease: [0.16, 1, 0.3, 1]
       }
-    })
+    }
   }
 
   return (
@@ -71,8 +69,8 @@ export default function Navigation() {
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: hidden ? -100 : 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed top-0 left-0 right-0 z-[100] h-24 flex items-center bg-background/50 backdrop-blur-xl border-b border-border/10 px-4 md:px-10 lg:px-16"
+        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+        className="fixed top-0 left-0 right-0 z-[100] h-24 flex items-center bg-background/70 backdrop-blur-md border-b border-border/10 px-4 md:px-10 lg:px-16"
       >
         <div className="w-full flex items-center justify-between">
           <div className="flex flex-col items-start mr-auto">
@@ -109,14 +107,15 @@ export default function Navigation() {
 
             <button
               onClick={() => scrollTo("#contact")}
-              className="hidden sm:flex items-center gap-3 px-8 py-3 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-black rounded-full text-[10px] font-black uppercase tracking-[0.2em] group hover:scale-105 transition-all"
+              className="hidden sm:flex items-center gap-4 px-8 py-3 bg-neutral-900 dark:bg-neutral-100 text-white dark:text-black rounded-full text-[10px] font-black uppercase tracking-widest transition-transform hover:scale-105"
             >
-              Start Project <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+              Start Project <ArrowRight size={14} />
             </button>
 
             <button 
               className="lg:hidden text-foreground p-2"
               onClick={() => setMenuOpen(true)}
+              aria-label="Open Menu"
             >
               <Menu size={24} />
             </button>
@@ -131,53 +130,55 @@ export default function Navigation() {
             initial="closed"
             animate="open"
             exit="closed"
-            className="fixed inset-0 z-[110] bg-background flex flex-col pt-32 pb-12 px-8 sm:px-16"
+            className="fixed inset-0 z-[110] bg-background flex flex-col pt-32 pb-12 px-8 sm:px-16 overflow-y-auto"
           >
             <div className="absolute top-8 right-8 flex items-center gap-6">
               <button
                 onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="text-muted-foreground hover:text-foreground transition-colors p-2"
+                className="text-muted-foreground hover:text-foreground p-2"
               >
                 {mounted && (theme === "dark" ? <Sun size={20} /> : <Moon size={20} />)}
               </button>
               <button 
-                className="text-foreground p-2 border border-border rounded-full"
+                className="text-foreground p-2 border border-border rounded-full hover:bg-border/20 transition-colors"
                 onClick={() => setMenuOpen(false)}
+                aria-label="Close Menu"
               >
                 <X size={24} />
               </button>
             </div>
 
-            <div className="flex flex-col h-full justify-between">
-              <nav className="flex flex-col gap-6">
+            <div className="flex flex-col min-h-full">
+              <nav className="flex flex-col gap-6 mb-16">
                 {["Work", "Services", "Experience", "Resume", "Contact"].map((link, idx) => (
                   <motion.button
                     key={link}
-                    custom={idx}
-                    variants={linkVariants}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + idx * 0.05 }}
                     onClick={() => scrollTo(`#${link.toLowerCase()}`)}
-                    className="text-5xl sm:text-7xl font-bold tracking-tighter uppercase text-left hover:italic transition-all group"
+                    className="text-5xl sm:text-7xl font-bold tracking-tighter uppercase text-left hover:italic transition-all group w-full"
                   >
-                    <span className="block group-hover:pl-4 transition-all duration-500">
-                      {link} <ArrowRight className="inline-block w-8 h-8 opacity-0 group-hover:opacity-100 -translate-x-4 group-hover:translate-x-2 transition-all" />
+                    <span className="flex items-center justify-between group-hover:pl-4 transition-all duration-300">
+                      {link} <ArrowRight className="w-8 h-8 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </span>
                   </motion.button>
                 ))}
               </nav>
 
-              <div className="mt-auto border-t border-border/50 pt-12 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-12">
+              <div className="mt-auto border-t border-border/50 pt-12 flex flex-col gap-12">
                 <div className="space-y-4">
                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-muted-foreground block">Connectivity</span>
-                   <div className="flex gap-8">
+                   <div className="flex gap-10">
                       <a href="https://github.com/akashkuppattil-dev" target="_blank" className="hover:text-muted-foreground transition-colors"><Github size={24}/></a>
                       <a href="https://linkedin.com/in/akash-k-developer" target="_blank" className="hover:text-muted-foreground transition-colors"><Linkedin size={24}/></a>
                       <a href="https://instagram.com/akash__kuppattil" target="_blank" className="hover:text-muted-foreground transition-colors"><Instagram size={24}/></a>
                    </div>
                 </div>
 
-                <div className="text-right hidden sm:block">
+                <div className="space-y-2">
                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground">© 2026 Akash Kuppattil</p>
-                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground mt-2">TECHNICAL ARCHITECT</p>
+                   <p className="text-[10px] font-black uppercase tracking-[0.4em] text-muted-foreground">TECHNICAL ARCHITECT</p>
                 </div>
               </div>
             </div>
