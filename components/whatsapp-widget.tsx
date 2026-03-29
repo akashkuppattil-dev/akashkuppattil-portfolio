@@ -45,23 +45,23 @@ export default function WhatsAppWidget() {
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                         className="w-[320px] rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-zinc-900 border border-border/50"
                     >
-                        {/* Header */}
-                        <div className="bg-foreground p-6 flex items-center justify-between text-background">
+                        {/* Header with Official WhatsApp Color */}
+                        <div className="bg-[#25D366] p-6 flex items-center justify-between text-white">
                             <div className="flex items-center gap-4">
-                                <div className="w-10 h-10 rounded-full bg-background flex items-center justify-center text-foreground font-black text-xs">
+                                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-black text-xs">
                                     AK
                                 </div>
                                 <div className="space-y-1">
                                     <p className="font-bold text-xs uppercase tracking-[0.2em]">Akash Kuppattil</p>
                                     <div className="flex items-center gap-1.5 mt-0.5">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                                        <p className="text-[9px] font-black uppercase tracking-[0.2em] opacity-60">Studio Support</p>
+                                        <div className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                                        <p className="text-[9px] font-black uppercase tracking-[0.2em] opacity-80">Studio Support</p>
                                     </div>
                                 </div>
                             </div>
                             <button
                                 onClick={() => setOpen(false)}
-                                className="w-8 h-8 rounded-full hover:bg-white/10 flex items-center justify-center transition-colors"
+                                className="w-8 h-8 rounded-full hover:bg-black/10 flex items-center justify-center transition-colors"
                             >
                                 <X className="w-4 h-4" />
                             </button>
@@ -76,23 +76,23 @@ export default function WhatsAppWidget() {
                             <div className="flex flex-col gap-3">
                                 <button
                                     onClick={() => handleChat("hire")}
-                                    className="w-full bg-foreground text-background text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-neutral-800 transition-all border border-foreground"
+                                    className="w-full bg-[#25D366] text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-[#128C7E] transition-all"
                                 >
-                                    Hire Development <Send className="w-3.5 h-3.5" />
+                                    Hire Development <Send className="w-3.5 h-3.5 rotate-[-15deg] fill-current" />
                                 </button>
 
                                 <button
                                     onClick={() => handleChat("project")}
                                     className="w-full bg-transparent text-foreground text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-border/20 transition-all border border-border"
                                 >
-                                    Build Concept <Send className="w-3.5 h-3.5" />
+                                    Build Concept <Send className="w-3.5 h-3.5 text-[#25D366]" />
                                 </button>
 
                                 <button
                                     onClick={() => handleChat("connect")}
                                     className="w-full bg-transparent text-foreground text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-border/20 transition-all border border-border"
                                 >
-                                    Direct Query <Send className="w-3.5 h-3.5" />
+                                    Direct Query <Send className="w-3.5 h-3.5 text-[#25D366]" />
                                 </button>
                             </div>
                         </div>
@@ -100,12 +100,12 @@ export default function WhatsAppWidget() {
                 )}
             </AnimatePresence>
 
-            {/* Floating Button */}
+            {/* Floating Button with Official WhatsApp Color */}
             <motion.button
                 onClick={handleOpen}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="relative w-16 h-16 rounded-full bg-foreground text-background shadow-2xl flex items-center justify-center group"
+                className="relative w-16 h-16 rounded-full bg-[#25D366] text-white shadow-2xl flex items-center justify-center group"
             >
                 <AnimatePresence mode="wait">
                     {open ? (
