@@ -1,48 +1,56 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ArrowRight, Sparkles } from "lucide-react"
+import { ArrowRight, Sparkles, Cpu, Layers, ShieldCheck, BarChart3, Bot, Layout, Palette, ShoppingCart } from "lucide-react"
 
 const SERVICES = [
   {
     id: "01",
     title: "Web Design & Development",
-    description: "High-performance, responsive systems. We build web applications with modern technologies that scale. From Next.js frontends to robust API architectures."
+    description: "High-performance, responsive systems. We build web applications with modern technologies that scale. From Next.js frontends to robust API architectures.",
+    icon: <Layout size={18} />
   },
   {
     id: "02",
     title: "UI/UX Design",
-    description: "User-centered digital products. Thoughtful design that drives engagement and conversion. We create intuitive interfaces that users love."
+    description: "User-centered digital products. Thoughtful design that drives engagement and conversion. We create intuitive interfaces that users love.",
+    icon: <Palette size={18} />
   },
   {
     id: "03",
     title: "Branding & Identity",
-    description: "Narrative-driven brand development. Building unique brand voices through comprehensive visual systems and strategic positioning."
+    description: "Narrative-driven brand development. Building unique brand voices through comprehensive visual systems and strategic positioning.",
+    icon: <Sparkles size={18} />
   },
   {
     id: "04",
-    title: "Backend & API Development",
-    description: "Robust, secure server-side logic. We architect and build scalable server-side solutions and integrations. Focused on data integrity and security."
+    title: "Backend & API Architecture",
+    description: "Robust, secure server-side logic. We architect and build scalable server-side solutions and integrations. Focused on data integrity and security.",
+    icon: <Layers size={18} />
   },
   {
     id: "05",
     title: "E-commerce Solutions",
-    description: "Scalable commerce experiences. Full-service digital commerce solutions built for growth. Custom storefronts and optimized checkout flows."
+    description: "Scalable commerce experiences. Full-service digital commerce solutions built for growth. Custom storefronts and optimized checkout flows.",
+    icon: <ShoppingCart size={18} />
   },
   {
     id: "06",
     title: "SEO & Growth",
-    description: "Organic visibility & performance. Technical SEO and digital marketing strategies to increase your business reach and conversion efficiency."
+    description: "Organic visibility & performance. Technical SEO and digital marketing strategies to increase your business reach and conversion efficiency.",
+    icon: <BarChart3 size={18} />
   },
   {
     id: "07",
     title: "AI Integration & Automation",
-    description: "Leveraging modern AI and automation to reduce costs and improve business efficiency through custom agents and intelligent process design."
+    description: "Leveraging modern AI and automation to reduce costs and improve business efficiency through custom agents and intelligent process design.",
+    icon: <Bot size={18} />
   },
   {
     id: "08",
     title: "Maintenance & Support",
-    description: "Ongoing technical partnership. Reliable long-term support to ensure your digital systems remain stable, secure, and performant."
+    description: "Ongoing technical partnership. Reliable long-term support to ensure your digital systems remain stable, secure, and performant.",
+    icon: <ShieldCheck size={18} />
   }
 ]
 
@@ -80,33 +88,33 @@ export default function Services() {
            className="mb-12 sm:mb-20"
         >
           <div className="flex items-center gap-3 mb-6">
-             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-whatsapp block">What I do</span>
+             <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-whatsapp block">Service Architecture</span>
              <div className="h-[1px] w-12 bg-whatsapp/30" />
-             <Sparkles size={12} className="text-whatsapp animate-pulse" />
+             <Cpu size={12} className="text-whatsapp animate-pulse" />
           </div>
           <h2 className="text-[clamp(1.75rem,5vw,3.5rem)] font-bold tracking-tight leading-[1.1] uppercase">
             Comprehensive <br className="hidden md:block"/> <span className="editorial-italic font-normal lowercase text-whatsapp">digital solutions</span> <br className="hidden md:block"/> crafted for real-world impact.
           </h2>
         </motion.div>
 
-        {/* Mobile View: Horizontal Scroll for "Different UI" */}
+        {/* Mobile View: Horizontal Scroll */}
         <div className="flex md:hidden overflow-x-auto pb-12 snap-x snap-mandatory scrollbar-hide -mx-6 px-6 gap-6">
            {SERVICES.map((service) => (
              <motion.div 
                key={service.id}
-               className="min-w-[85vw] snap-center bg-border/5 p-10 border border-border rounded-3xl flex flex-col justify-between"
+               className="min-w-[85vw] snap-center bg-zinc-50 dark:bg-zinc-900/40 p-10 border border-border rounded-[2rem] flex flex-col justify-between"
              >
-                <div className="space-y-8">
+                <div className="space-y-6">
                    <div className="flex items-center justify-between">
-                      <span className="text-4xl font-bold tracking-tighter text-border">{service.id}</span>
+                      <span className="text-4xl font-bold tracking-tighter text-border opacity-50">{service.id}</span>
                       <div className="w-10 h-10 rounded-full border border-whatsapp/20 flex items-center justify-center text-whatsapp bg-whatsapp/5">
-                         <Sparkles size={14} />
+                         {service.icon}
                       </div>
                    </div>
                    <h3 className="text-2xl font-bold tracking-tight uppercase leading-tight">
                      {service.title}
                    </h3>
-                   <p className="text-muted-foreground text-base leading-relaxed break-words">
+                   <p className="text-muted-foreground text-sm leading-relaxed text-balance">
                      {service.description}
                    </p>
                 </div>
@@ -120,14 +128,14 @@ export default function Services() {
            ))}
         </div>
         
-        {/* Mobile Swipe Indicator (Only visible on tiny screens) */}
+        {/* Mobile Swipe Indicator */}
         <div className="flex md:hidden justify-center gap-2 mb-12 opacity-30">
            {SERVICES.slice(0, 4).map((_, i) => (
               <div key={i} className={`h-1 rounded-full ${i === 0 ? 'w-8 bg-whatsapp' : 'w-2 bg-border'}`} />
            ))}
         </div>
 
-        {/* Desktop View: Grid (Stays for md and above) */}
+        {/* Desktop View: Interactive Grid */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -139,24 +147,29 @@ export default function Services() {
             <motion.div 
               key={service.id} 
               variants={itemVariants}
-              className="p-10 md:p-12 border-r border-b border-border group hover:bg-foreground hover:text-background transition-colors duration-500 flex flex-col justify-between"
+              className="p-10 md:p-12 border-r border-b border-border group hover:bg-neutral-900 transition-all duration-500 flex flex-col justify-between"
             >
               <div>
-                <span className="text-xs font-medium tracking-widest text-muted-foreground group-hover:text-background/60 mb-8 block">
-                  {service.id}
-                </span>
-                <h3 className="text-xl md:text-2xl font-semibold tracking-tight mb-4 text-balance text-foreground group-hover:text-background transition-colors uppercase">
+                <div className="flex items-start justify-between mb-8">
+                  <span className="text-xs font-medium tracking-widest text-muted-foreground group-hover:text-background/60 block">
+                    {service.id}
+                  </span>
+                  <div className="text-muted-foreground group-hover:text-whatsapp transition-colors">
+                    {service.icon}
+                  </div>
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-4 text-balance text-foreground group-hover:text-white transition-colors uppercase leading-tight">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground group-hover:text-background/80 leading-relaxed text-balance transition-colors">
+                <p className="text-muted-foreground group-hover:text-zinc-400 text-sm leading-relaxed text-balance transition-colors mb-8">
                   {service.description}
                 </p>
               </div>
               <a 
                 href="#contact" 
-                className="mt-12 inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] group-hover:text-background transition-colors border-b border-border group-hover:border-background/30 pb-1 w-fit"
+                className="mt-12 inline-flex items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] group-hover:text-whatsapp transition-colors border-b border-border group-hover:border-whatsapp/30 pb-1 w-fit"
               >
-                Learn More <ArrowRight size={12} />
+                Launch Query <ArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
               </a>
             </motion.div>
           ))}
