@@ -46,7 +46,7 @@ export default function WhatsAppWidget() {
                         className="w-[320px] rounded-2xl overflow-hidden shadow-2xl bg-white dark:bg-zinc-900 border border-border/50"
                     >
                         {/* Header with Official WhatsApp Color */}
-                        <div className="bg-[#25D366] p-6 flex items-center justify-between text-white">
+                        <div className="bg-whatsapp p-6 flex items-center justify-between text-white">
                             <div className="flex items-center gap-4">
                                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white font-black text-xs">
                                     AK
@@ -76,23 +76,23 @@ export default function WhatsAppWidget() {
                             <div className="flex flex-col gap-3">
                                 <button
                                     onClick={() => handleChat("hire")}
-                                    className="w-full bg-[#25D366] text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-[#128C7E] transition-all"
+                                    className="w-full bg-whatsapp text-white text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-whatsapp/80 transition-all shadow-[0_0_20px_rgba(37,211,102,0.3)]"
                                 >
                                     Hire Development <Send className="w-3.5 h-3.5 rotate-[-15deg] fill-current" />
                                 </button>
 
                                 <button
                                     onClick={() => handleChat("project")}
-                                    className="w-full bg-transparent text-foreground text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-border/20 transition-all border border-border"
+                                    className="w-full bg-transparent text-foreground text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-whatsapp/5 transition-all border border-border"
                                 >
-                                    Build Concept <Send className="w-3.5 h-3.5 text-[#25D366]" />
+                                    Build Concept <Send className="w-3.5 h-3.5 text-whatsapp" />
                                 </button>
 
                                 <button
                                     onClick={() => handleChat("connect")}
-                                    className="w-full bg-transparent text-foreground text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-border/20 transition-all border border-border"
+                                    className="w-full bg-transparent text-foreground text-[10px] font-black uppercase tracking-[0.3em] rounded-none py-4 px-6 flex items-center justify-between hover:bg-whatsapp/5 transition-all border border-border"
                                 >
-                                    Direct Query <Send className="w-3.5 h-3.5 text-[#25D366]" />
+                                    Direct Query <Send className="w-3.5 h-3.5 text-whatsapp" />
                                 </button>
                             </div>
                         </div>
@@ -105,7 +105,7 @@ export default function WhatsAppWidget() {
                 onClick={handleOpen}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="relative w-16 h-16 rounded-full bg-[#25D366] text-white shadow-2xl flex items-center justify-center group"
+                className="relative w-16 h-16 rounded-full bg-whatsapp text-white shadow-[0_0_30px_rgba(37,211,102,0.4)] flex items-center justify-center group"
             >
                 <AnimatePresence mode="wait">
                     {open ? (
