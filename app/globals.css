@@ -13,23 +13,25 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #000000;
-  --muted: #6b7280;
-  --muted-foreground: #6b7280;
-  --border: #e5e7eb;
-  --accent: #000000;
+  --background: #f0f2f5; /* WhatsApp light background */
+  --foreground: #111b21; /* WhatsApp dark text */
+  --muted: #667781;
+  --muted-foreground: #667781;
+  --border: #d1d7db;
+  --accent: #25D366; /* WhatsApp Green */
   --accent-foreground: #ffffff;
+  --whatsapp: #25D366;
 }
 
 .dark {
-  --background: #000000;
-  --foreground: #ffffff;
-  --muted: #9ca3af;
-  --muted-foreground: #9ca3af;
-  --border: #262626;
-  --accent: #ffffff;
-  --accent-foreground: #000000;
+  --background: #0b141a; /* WhatsApp dark background */
+  --foreground: #e9edef; /* WhatsApp light text */
+  --muted: #8696a0;
+  --muted-foreground: #8696a0;
+  --border: #222d34;
+  --accent: #00a884; /* WhatsApp Dark Green */
+  --accent-foreground: #ffffff;
+  --whatsapp: #25D366;
 }
 
 @theme inline {
@@ -43,6 +45,7 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-whatsapp: var(--whatsapp);
   
   --radius-pill: 9999px;
 }
@@ -74,7 +77,7 @@ body {
 
 /* ── Components ── */
 .btn-pill {
-  @apply rounded-none px-12 py-5 transition-all duration-500 font-bold uppercase tracking-[0.3em] inline-flex items-center justify-center;
+  @apply rounded-full px-12 py-5 transition-all duration-500 font-bold uppercase tracking-[0.3em] inline-flex items-center justify-center;
 }
 
 /* ── Layout ── */

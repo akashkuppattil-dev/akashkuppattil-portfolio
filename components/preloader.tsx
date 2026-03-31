@@ -81,7 +81,7 @@ export default function Preloader() {
                             </motion.span>
                         </div>
                     </div>
-                </div>
+                </motion.div>
             )}
         </AnimatePresence>
     )
